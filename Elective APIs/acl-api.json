@@ -1,0 +1,2621 @@
+{
+  "info": {
+    "_postman_id": "34a7a631-1af5-4ba9-bcd6-02a3e101bfe4",
+    "name": "acl-api",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "status",
+          "item": [
+            {
+              "name": "/v1/status",
+              "_postman_id": "84237d9f-0b97-4837-8798-00ad5f797d7f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [],
+                "url": "{{host}}/v1/status"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/twig",
+              "_postman_id": "13ae1028-33a7-42d1-97ed-28c916efba60",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{host}}/v1/twig"
+              },
+              "response": []
+            }
+          ],
+          "_postman_id": "92efb514-a86c-4878-80b1-ee8d2c518960",
+          "_postman_isSubFolder": true
+        },
+        {
+          "name": "subjects",
+          "item": [
+            {
+              "name": "/v1/subjects",
+              "_postman_id": "34edc603-76eb-4735-844d-f55098b44c2b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "{{token}}"
+                  }
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "type": "text",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {}
+                  }
+                },
+                "url": "{{host}}/v1/subjects",
+                "description": "## List subject objects\n\n`GET /v1/subjects`\n\nGET Parameters:\n* **filters** (array), optional - One or more filters\n* **sorts** (array), optional - One or more sorting parameters\n* **limit** (integer), optional - Limit on the result set\n* **offset** (integer), optional - Offset on the result set\n* **count** (boolean), optional - If set to true Response:X-Results-Total header will show total count in result set (regardless of any limit and offset set)\n\nFilter Types:\n* **subject.id**\n* **subject.name**\n* **subject.description**\n* **subject.createdAt**\n* **subject.updatedAt**\n* **subject.deletedAt**\n\nSort Types:\n* **subject.id**\n* **subject.name**\n* **subject.description**\n* **subject.createdAt**\n* **subject.updatedAt**\n* **subject.deletedAt**\n\n### Request:\n`GET /v1/subjects`\n\n### Response - 200 OK:\nX-Results-Total 2\n```\n[\n    {\n        \"id\": 7,\n        \"name\": \"bar\",\n        \"description\": \"Bar entity\",\n        \"createdAt\": {\n            \"date\": \"2019-04-05 09:20:07.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": {\n            \"date\": \"2019-04-05 09:27:33.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"deletedAt\": null\n    },\n    {\n        \"id\": 8,\n        \"name\": \"foo\",\n        \"description\": \"Foo Entity\",\n        \"createdAt\": {\n            \"date\": \"2019-04-05 09:28:07.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    }\n]\n```\n\n### Error Response Codes\n\n`400 - Bad Request`\n```\n{\n    \"message\": \"value for index 0, part 2 (field) must be one of (subject.id, subject.name, subject.description, subject.createdAt, subject.updatedAt, subject.deletedAt)\",\n    \"code\": 4000101\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/subjects",
+              "_postman_id": "db85b2ee-492a-42d4-af2a-bb8a212eb6ee",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "{{token}}"
+                  }
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"name\": \"ENGAGEMENT_COMPLETE_NOTIFICATION\",\n\t\"description\": \"Assessment engagement complete email notification\"\n}",
+                  "options": {
+                    "raw": {}
+                  }
+                },
+                "url": "{{host}}/v1/subjects",
+                "description": "## Create a new subject in a collection\n\n`POST /v1/subjects`\n\nPOST Parameters:\n* **name** (string), required, unique, max 128 - Subject name\n* **description** (string), required, max 256 - Description of the subject\n\n### Request:\n`POST /v1/subjects`\n\n```\n{\n\t\"name\": \"foo\",\n\t\"description\": \"Foo Entity\"\n}\n```\n\n### Response - 201 Created:\n```\n{\n    \"id\": 7,\n    \"name\": \"foo\",\n    \"description\": \"Foo Entity\",\n    \"createdAt\": {\n        \"date\": \"2019-04-05 09:20:07.482862\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"updatedAt\": null,\n    \"deletedAt\": null\n}\n```\n\n### Error Response Codes\n\n`400 - Bad request`\n```\n{\n    \"message\": \"Required parameter \"name\" missing\",\n    \"code\": 0\n}\n```\n\n`409 - Conflict`\n```\n{\n    \"message\": \"Subject with name foo already exists\",\n    \"code\": 4090001\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/subjects/:spec",
+              "_postman_id": "34f97fc4-6125-49f3-b880-e304b0eaddb9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "type": "text",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{host}}/v1/subjects/{{subjectId}}",
+                "description": "## Reads subject details\n\n`GET /v1/subjects/:spec`\n\nSegment Parameters:\n* **spec** (string | int) - Subject id or name\n\n### Request:\n`GET /v1/subjects/7` | `GET /v1/subjects/foo`\n\n### Response - 200 OK:\n```\n{\n    \"id\": 7,\n    \"name\": \"foo\",\n    \"description\": \"Foo Entity\",\n    \"createdAt\": {\n        \"date\": \"2019-04-05 09:20:07.000000\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"updatedAt\": null,\n    \"deletedAt\": null\n}\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"Subject not found\",\n    \"code\": 0\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/subjects/:spec",
+              "_postman_id": "b3cd1abd-bf37-4c24-bd27-7abb3518b3e7",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "type": "text",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"name\": \"bar\",\n\t\"description\": \"Bar entity\"\n}"
+                },
+                "url": "{{host}}/v1/subjects/{{subjectId}}",
+                "description": "## Update subject in a collection. Applies partial modifications to a subject.\n\n`PATCH /v1/subjects/:spec`\n\nSegment Parameters:\n* **spec** (string | int) - Subject id or name\n\nPOST Parameters:\n* **name** (string) - Subject name\n* **description** (string) - Subject descriptin\n\n### Request:\n`PATCH /v1/subjects/7` | `PATCH /v1/subjects/foo`\n\n```\n{\n\t\"name\": \"bar\",\n\t\"description\": \"Bar entity\"\n}\n```\n\n### Response - 200 OK:\n```\n{\n    \"id\": 7,\n    \"name\": \"bar\",\n    \"description\": \"Bar entity\",\n    \"createdAt\": {\n        \"date\": \"2019-04-05 09:20:07.000000\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"updatedAt\": {\n        \"date\": \"2019-04-05 09:27:33.259172\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"deletedAt\": null\n}\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"Subject not found\",\n    \"code\": 0\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/subjects/:spec",
+              "_postman_id": "7a5745fe-0bc4-4038-b572-1a744824b547",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "type": "text",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{host}}/v1/subjects/{{subjectId}}",
+                "description": "## Delete subject from Collection\n\n`DELETE /v1/subjects/:spec`\n\nSegment Parameters:\n* **spec** (string | id) - Subject id\n\n### Request:\n`DELETE /v1/subjects/7` | `DELETE /v1/subjects/foo`\n\n### Response - 200 OK:\n```\n{\n    \"resourceId\": 7,\n    \"message\": \"Subject has been successfully deleted\"\n}\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"Subject not found\",\n    \"code\": 0\n}\n```"
+              },
+              "response": []
+            }
+          ],
+          "_postman_id": "5366c884-fae1-47ab-8dbe-404b7d38bfee",
+          "_postman_isSubFolder": true
+        },
+        {
+          "name": "permissions",
+          "item": [
+            {
+              "name": "/v1/permissions",
+              "_postman_id": "36eb1be5-28a5-4383-a3f7-40d955722a34",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "{{token}}"
+                  }
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "type": "text",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{host}}/v1/permissions",
+                "description": "## List permission objects\n\n`GET /v1/permissions`\n\nGET Parameters:\n* **filters** (array), optional - One or more filters\n* **sorts** (array), optional - One or more sorting parameters\n* **limit** (integer), optional - Limit on the result set\n* **offset** (integer), optional - Offset on the result set\n* **count** (boolean), optional - If set to true Response:X-Results-Total header will show total count in result set (regardless of any limit and offset set)\n\nFilter Types:\n* **permission.id**\n* **permission.action**\n* **permission.name**\n* **permission.createdAt**\n* **permission.updatedAt**\n* **permission.deletedAt**\n\nSort Types:\n* **permission.id**\n* **permission.action**\n* **permission.name**\n* **permission.createdAt**\n* **permission.updatedAt**\n* **permission.deletedAt**\n\n### Request:\n`GET /v1/permissions`\n\n### Response - 200 OK:\nX-Results-Total 2\n```\n[\n    {\n        \"id\": 5,\n        \"action\": \"undelete\",\n        \"name\": \"undelete object\",\n        \"createdAt\": null,\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    },\n    {\n        \"id\": 1,\n        \"action\": \"view\",\n        \"name\": \"view object\",\n        \"createdAt\": null,\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    }\n]\n```\n\n### Error Response Codes\n\n`400 - Bad Request`\n```\n{\n    \"message\": \"value for index 0, part 2 (field) must be one of (permission.id, permission.name, permission.action, permission.createdAt, permission.updatedAt, permission.deletedAt)\",\n    \"code\": 4000101\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/permissions",
+              "_postman_id": "34b6894a-0109-4e1f-9385-4d3fb657cd58",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "{{token}}"
+                  }
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"action\": \"view\",\n\t\"name\": \"View object\"\n}"
+                },
+                "url": "{{host}}/v1/permissions",
+                "description": "## Create a new permission in a collection\n\n`POST /v1/permissions`\n\nPOST Parameters:\n* **action** (string), required, unique, max 64 - Action of the invoked by the permission\n* **name** (string), required, max 128 - Permission name\n\n### Request:\n`POST /v1/permissions`\n\n```\n{\n\t\"action\": \"view\",\n\t\"name\": \"View object\"\n}\n```\n\n### Response - 201 Created:\n```\n{\n    \"id\": 6,\n    \"action\": \"view\",\n    \"name\": \"View object\",\n    \"createdAt\": {\n        \"date\": \"2019-04-05 13:14:31.000000\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"updatedAt\": null,\n    \"deletedAt\": null\n}\n```\n\n### Error Response Codes\n\n`400 - Bad request`\n```\n{\n    \"message\": \"Required parameter \"action\" missing\",\n    \"code\": 0\n}\n```\n\n`409 - Conflict`\n```\n{\n    \"message\": \"Permission with action view already exists\",\n    \"code\": 4090001\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/permissions/:spec",
+              "_postman_id": "7dd925b9-3e8a-40c5-bd06-5c6953a4a74a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "{{token}}"
+                  }
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "type": "text",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{host}}/v1/permissions/{{permissionId}}",
+                "description": "## Reads permission details\n\n`GET /v1/permissions/:spec`\n\nSegment Parameters:\n* **spec** (string | int) - Permission id or action\n\n### Request:\n`GET /v1/permissions/7` | `GET /v1/permissions/view`\n\n### Response - 200 OK:\n```\n{\n    \"id\": 6,\n    \"action\": \"view\",\n    \"name\": \"View object\",\n    \"createdAt\": {\n        \"date\": \"2019-04-05 13:14:31.000000\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"updatedAt\": null,\n    \"deletedAt\": null\n}\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"Permission not found\",\n    \"code\": 0\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/permissions/:spec",
+              "_postman_id": "82f7bddf-7841-4940-873c-9650d3553bfb",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "type": "text",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"name\": \"Create object\",\n\t\"action\": \"create\"\n}"
+                },
+                "url": "{{host}}/v1/permissions/{{permissionId}}",
+                "description": "## Update permission in a collection. Applies partial modifications to a permission.\n\n`PATCH /v1/permissions/:spec`\n\nSegment Parameters:\n* **spec** (string | int) - Permission id or action\n\nPOST Parameters:\n* **action** (string) - Permission action\n* **name** (string) - Permission name\n\n### Request:\n`PATCH /v1/permissions/7` | `PATCH /v1/permissions/foo`\n\n```\n{\n\t\"action\": \"create\",\n\t\"name\": \"Create entity\"\n}\n```\n\n### Response - 200 OK:\n```\n{\n    \"id\": 6,\n    \"action\": \"create\",\n    \"name\": \"Create object\",\n    \"createdAt\": {\n        \"date\": \"2019-04-05 13:14:31.000000\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"updatedAt\": {\n        \"date\": \"2019-04-05 14:09:41.693673\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"deletedAt\": null\n}\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"Permission not found\",\n    \"code\": 0\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/permissions/:spec",
+              "_postman_id": "8253ca6d-3968-42de-991a-8f6896acde65",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "type": "text",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"name\": \"Edit object\",\n\t\"action\": \"edit\"\n}"
+                },
+                "url": "{{host}}/v1/permissions/{{permissionId}}",
+                "description": "## Delete permission from Collection\n\n`DELETE /v1/permissions/:spec`\n\nSegment Parameters:\n* **spec** (string | id) - Permission id\n\n### Request:\n`DELETE /v1/permissions/7` | `DELETE /v1/permissions/foo`\n\n### Response - 200 OK:\n```\n{\n    \"resourceId\": 7,\n    \"message\": \"Permission has been successfully deleted\"\n}\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"Permission not found\",\n    \"code\": 0\n}\n```"
+              },
+              "response": []
+            }
+          ],
+          "_postman_id": "96887a0e-1186-44ea-a9e2-783e337be947",
+          "_postman_isSubFolder": true
+        },
+        {
+          "name": "subject-permissions",
+          "item": [
+            {
+              "name": "/v1/subject-permissions",
+              "_postman_id": "71158948-a729-4814-ad97-79d250a8fc62",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "{{token}}"
+                  }
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"subject\": \"ENGAGEMENT_COMPLETE_NOTIFICATION\",\n\t\"permission\": \"edit\"\n}",
+                  "options": {
+                    "raw": {}
+                  }
+                },
+                "url": "{{host}}/v1/subject-permissions",
+                "description": "## Create a new permission in a collection\n\n`POST /v1/subject-permissions`\n\nPOST Parameters:\n* **subject** (string), required - Id or spec of Subject\n* **permission** (string), required - Id or spec of Permission\n\n### Request:\n`POST /v1/subject-permissions`\n\n```\n{\n\t\"subject\": \"foo\",\n\t\"permission\": \"view\"\n}\n```\n```\n{\n\t\"subject\": \"1\",\n\t\"permission\": \"2\"\n}\n```\n\n\n### Response - 201 Created:\n```\n{\n    \"id\": 11,\n    \"mask\": \"FOO_VIEW\",\n    \"createdAt\": {\n        \"date\": \"2019-04-08 11:41:31.243616\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    }\n}\n```\n\n### Error Response Codes\n\n`400 - Bad request`\n```\n{\n    \"message\": \"Required parameter \"subject\" missing\",\n    \"code\": 0\n}\n```\n\n`409 - Conflict`\n```\n{\n    \"message\": \"SubjectPermission with mask FOO_VIEW already exists\",\n    \"code\": 4090001\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/subject-permissions",
+              "_postman_id": "fa7320f9-122c-4c0c-8ef1-b860d6724c21",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "{{token}}"
+                  }
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "type": "text",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{host}}/v1/subject-permissions?sorts[]=subjectPermission.id-asc",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "subject-permissions"
+                  ],
+                  "query": [
+                    {
+                      "key": "sorts[]",
+                      "value": "subjectPermission.id-asc"
+                    }
+                  ]
+                },
+                "description": "## List subject permission objects\n\n`GET /v1/subject-permissions`\n\nGET Parameters:\n* **filters** (array), optional - One or more filters\n* **sorts** (array), optional - One or more sorting parameters\n* **limit** (integer), optional - Limit on the result set\n* **offset** (integer), optional - Offset on the result set\n* **count** (boolean), optional - If set to true Response:X-Results-Total header will show total count in result set (regardless of any limit and offset set)\n\nFilter Types:\n* **subjectPermission.id**\n* **subjectPermission.mask**\n* **subjectPermission.createdAt**\n* **permission.id**\n* **permission.action**\n* **permission.name**\n* **permission.createdAt**\n* **permission.updatedAt**\n* **permission.deletedAt**\n* **subject.id**\n* **subject.name**\n* **subject.description**\n* **subject.createdAt**\n* **subject.updatedAt**\n* **subject.deletedAt**\n\nSort Types:\n* **subjectPermission.id**\n* **subjectPermission.mask**\n* **subjectPermission.createdAt**\n* **permission.id**\n* **permission.action**\n* **permission.name**\n* **permission.createdAt**\n* **permission.updatedAt**\n* **permission.deletedAt**\n* **subject.id**\n* **subject.name**\n* **subject.description**\n* **subject.createdAt**\n* **subject.updatedAt**\n* **subject.deletedAt**\n\n### Request:\n`GET /v1/subject-permissions`\n\n### Response - 200 OK:\nX-Results-Total 2\n```\n[\n    {\n        \"id\": 9,\n        \"mask\": \"BAR_VIEW\",\n        \"createdAt\": {\n            \"date\": \"2019-04-08 08:53:45.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        }\n    },\n    {\n        \"id\": 7,\n        \"mask\": \"FOO_EDIT\",\n        \"createdAt\": {\n            \"date\": \"2019-04-08 08:50:16.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        }\n    }\n]\n```\n\n### Error Response Codes\n\n`400 - Bad Request`\n```\n{\n    \"message\": \"value for index 0, part 2 (field) must be one of (subjectPermission.id, subjectPermission.mask, subjectPermission.createdAt)\",\n    \"code\": 4000101\n}\n```"
+              },
+              "response": [
+                {
+                  "id": "22b1c103-14e0-4801-bc72-bed7dd4d8ee6",
+                  "name": "/v1/subject-permissions",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": "{{host}}/v1/subject-permissions"
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Server",
+                      "value": "nginx/1.15.10"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Transfer-Encoding",
+                      "value": "chunked"
+                    },
+                    {
+                      "key": "Cache-Control",
+                      "value": "no-cache, private"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 08 Apr 2019 15:16:59 GMT"
+                    },
+                    {
+                      "key": "X-Results-Total",
+                      "value": "3"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "X-Content-Type-Options",
+                      "value": "nosniff"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, GET, OPTIONS, PATCH, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, X-Auth-Token, X-App-Token, Authorization"
+                    },
+                    {
+                      "key": "Access-Control-Expose-Headers",
+                      "value": "X-Auth-Token-Expires-In, X-Results-Total"
+                    },
+                    {
+                      "key": "X-Service-Name",
+                      "value": "acl-api"
+                    },
+                    {
+                      "key": "Via",
+                      "value": "1.1 google"
+                    },
+                    {
+                      "key": "Alt-Svc",
+                      "value": "clear"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n    {\n        \"id\": 3,\n        \"mask\": \"FOO_CREATE\",\n        \"createdAt\": {\n            \"date\": \"2019-04-08 12:16:48.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        }\n    },\n    {\n        \"id\": 2,\n        \"mask\": \"FOO_EDIT\",\n        \"createdAt\": {\n            \"date\": \"2019-04-08 12:16:42.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        }\n    },\n    {\n        \"id\": 1,\n        \"mask\": \"FOO_VIEW\",\n        \"createdAt\": {\n            \"date\": \"2019-04-08 12:16:36.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        }\n    }\n]"
+                }
+              ]
+            },
+            {
+              "name": "/v1/subject-permissions/:spec",
+              "_postman_id": "8153575e-e899-4bf5-96d4-1706d25dc57e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "type": "text",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{host}}/v1/subject-permissions/{{subjectPermissionId}}",
+                "description": "## Reads SubjectPermission details\n\n`GET /v1/subject-permissions/:spec`\n\nSegment Parameters:\n* **spec** (string | int) - SubjectPermission id or mask\n\n### Request:\n`GET /v1/subject-permissions/11` | `GET /v1/subject-permissions/foo_view`\n\n### Response - 200 OK:\n```\n{\n    \"id\": 11,\n    \"mask\": \"FOO_VIEW\",\n    \"createdAt\": {\n        \"date\": \"2019-04-08 11:41:31.000000\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    }\n}\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"SubjectPermission not found\",\n    \"code\": 0\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/subject-permissions/:spec",
+              "_postman_id": "bb464bbd-1910-4994-8112-d3d33b8300f0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "{{token}}"
+                  }
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "type": "text",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{host}}/v1/subject-permissions/{{subjectPermissionId}}",
+                "description": "## Delete subject permission from Collection\n\n`DELETE /v1/subject-permissions/:spec`\n\nSegment Parameters:\n* **spec** (string | id) - SubjectPermission id or spec\n\n### Request:\n`DELETE /v1/subject-permissions/11` | `DELETE /v1/subject-permissions/foo_view`\n\n### Response - 200 OK:\n```\n{\n    \"resourceId\": 11,\n    \"message\": \"SubjectPermission has been successfully deleted\"\n}\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"SubjectPermission not found\",\n    \"code\": 0\n}\n```"
+              },
+              "response": []
+            }
+          ],
+          "_postman_id": "f53539c7-44ea-41ac-8a42-ee6f86414e28",
+          "_postman_isSubFolder": true
+        },
+        {
+          "name": "permission-groups",
+          "item": [
+            {
+              "name": "subject-permissions",
+              "item": [
+                {
+                  "name": "/v1/permission-groups/:permission-group/subject-permissions",
+                  "_postman_id": "e672d8c6-2504-4cb7-936f-6c9a097fb2df",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": {
+                        "token": "{{token}}"
+                      }
+                    },
+                    "method": "GET",
+                    "header": [],
+                    "url": "{{host}}/v1/permission-groups/{{permissionGroupId}}/subject-permissions",
+                    "description": "## List SubjectPermissions objects for given PermissionGroup\n\n`GET /v1/permission-groups/:permission-group/subject-permissions`\n\n### Request:\n`GET /v1/permission-groups/3FLQjBoNqTjx/subject-permissions`\n\n### Response - 200 OK:\nX-Results-Total 2\n```\n[\n    {\n        \"id\": 20,\n        \"mask\": \"FOO_VIEW\",\n        \"createdAt\": {\n            \"date\": \"2019-04-09 10:44:09.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        }\n    },\n    {\n        \"id\": 21,\n        \"mask\": \"FOO_EDIT\",\n        \"createdAt\": {\n            \"date\": \"2019-04-09 10:44:15.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        }\n    },\n    {\n        \"id\": 22,\n        \"mask\": \"KKK_EDIT\",\n        \"createdAt\": {\n            \"date\": \"2019-04-09 10:44:21.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        }\n    }\n]\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"PermissionGroup not found\",\n    \"code\": 0\n}\n```"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "/v1/permission-groups/:permission-group/subject-permissions",
+                  "_postman_id": "a3856ead-810f-4002-bd88-8d0c86ab0a02",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": {
+                        "token": "{{token}}"
+                      }
+                    },
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"subjectPermission\": \"449\"\n}",
+                      "options": {
+                        "raw": {}
+                      }
+                    },
+                    "url": "{{host}}/v1/permission-groups/{{permissionGroupId}}/subject-permissions",
+                    "description": "## Add SubjectPermission to a collection\n\nThis route is idempotent and only confirms the status of the operation. For example it can be called multiple times with the same details and and will return the same response as long as the given SubjectPermission exists in the collection (regardles if it existed in the collection prior to the operation).\n\n`PUT /v1/permission-groups/:permission-group/subject-permissions`\n\nPOST Parameters:\n* **subjectPermission** (string), required - SubjectPermission id to add to collection\n\n### Request:\n`PUT /v1/permission-groups/:permission-group/subject-permissions`\n\n```\n{\n\t\"subjectPermission\": \"3FLQjBoNqTjx\"\n}\n```\n\n### Response - 200 OK:\n```\n{\n    \"message\": \"Subject Permissions in collection\"\n}\n```\n\n### Error Response Codes\n\n`400 - Bad request`\n```\n{\n    \"message\": \"Required parameter \"subjectPermission\" missing\",\n    \"code\": 0\n}\n```"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "/v1/permission-groups/:permission-group/subject-permissions/:subject-permission",
+                  "_postman_id": "b3cdbbac-c3c3-41aa-9971-eaf0ab83b04b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": {
+                        "token": "{{token}}"
+                      }
+                    },
+                    "method": "DELETE",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": ""
+                    },
+                    "url": "{{host}}/v1/permission-groups/{{permissionGroupId}}/subject-permissions/{{subjectPermissionId}}",
+                    "description": "## Remove SubjectPermission from a collection\n\nThis route is idempotent and only confirms the status of the operation. For example it can be called multiple times with the same details and and will return the same response as long as the given SubjectPermission **does not** exists in the collection (regardles if it existed in the collection prior to the operation).\n\n`DELETE /v1/permission-groups/:permission-group/subject-permissions/:subject-permission`\n\nSegment Parameters:\n* **subject-permission** (string), required - SubjectPermission id\n\n### Request:\n`DELETE /v1/permission-groups/:permission-group/subject-permissions/3FLQjBoNqTjx`\n\n### Response - 200 OK:\n```\n{\n    \"message\": \"Subject Permissions not in collection\"\n}\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"PermissionGroup not found\",\n    \"code\": 0\n}\n```"
+                  },
+                  "response": []
+                }
+              ],
+              "_postman_id": "5a0c98ec-fd7d-458a-9284-6f66293201a1",
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "/v1/permission-groups",
+              "_postman_id": "bff10a4b-7cb2-4cd7-8de2-0bea3abc7934",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "type": "text",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"name\": \"ORG_ADMIN2\",\n\t\"description\": \"Organisation Admin\"\n}"
+                },
+                "url": "{{host}}/v1/permission-groups",
+                "description": "## Create a new permission in a collection\n\n`POST /v1/permission-groups`\n\nPOST Parameters:\n* **name** (string), required - Name of the Permission Group\n* **description** (string), required - Description of the Permission Group\n\n### Request:\n`POST /v1/permission-groups`\n\n```\n{\n\t\"name\": \"ORG_ADMIN\",\n\t\"description\": \"Organisation Admins\"\n}\n```\n\n### Response - 201 Created:\n```\n{\n    \"id\": \"cKJ2udklliSW\",\n    \"name\": \"ORG_ADMIN\",\n    \"description\": \"Organisation Admins\",\n    \"createdAt\": {\n        \"date\": \"2019-04-09 08:01:23.067300\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"updatedAt\": null,\n    \"deletedAt\": null\n}\n```\n\n### Error Response Codes\n\n`400 - Bad request`\n```\n{\n    \"message\": \"Required parameter \"name\" missing\",\n    \"code\": 0\n}\n```\n\n`409 - Conflict`\n```\n{\n    \"message\": \"PermissionGroup with name ORG_ADMIN already exists\",\n    \"code\": 4090001\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/permission-groups",
+              "_postman_id": "1bc58d07-375c-4468-bf37-e517805b4352",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "{{token}}"
+                  }
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "type": "text",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{host}}/v1/permission-groups",
+                "description": "## List PermissionGroup objects\n\n`GET /v1/permission-groups`\n\nGET Parameters:\n* **filters** (array), optional - One or more filters\n* **sorts** (array), optional - One or more sorting parameters\n* **limit** (integer), optional - Limit on the result set\n* **offset** (integer), optional - Offset on the result set\n* **count** (boolean), optional - If set to true Response:X-Results-Total header will show total count in result set (regardless of any limit and offset set)\n* **detailed** (boolean), optional - If set to true `Nested Entities` will be included in the response. Default: false.\n\nFilter Types:\n* **permissionGroup.id**\n* **permissionGroup.name**\n* **permissionGroup.description**\n* **permissionGroup.createdAt**\n* **permissionGroup.updatedAt**\n* **permissionGroup.deletedAt**\n\nSort Types:\n* **permissionGroup.id**\n* **permissionGroup.name**\n* **permissionGroup.description**\n* **permissionGroup.createdAt**\n* **permissionGroup.updatedAt**\n* **permissionGroup.deletedAt**\n\nNested Entities:\n* **permissionGroup.subjectPermissions** - array\n\n### Request:\n`GET /v1/permission-groups`\n\n### Response - 200 OK:\nX-Results-Total 2\n```\n[\n    {\n        \"id\": \"PsS35wjJRoBv\",\n        \"name\": \"bar\",\n        \"description\": \"Grants all permissions on Bar Entity\",\n        \"createdAt\": null,\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    },\n    {\n        \"id\": \"l94ghmQIih1J\",\n        \"name\": \"foo\",\n        \"description\": \"Grants all permissions on Foo Entity\",\n        \"createdAt\": null,\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    }\n]\n```\n\n### Request:\n`GET /v1/permission-groups?detailed=true`\n\n### Response - 200 OK:\nX-Results-Total 2\n```\n[\n    {\n        \"id\": \"27FAqaGIEf6y\",\n        \"name\": \"deleted_deleted_ORG_EA_ADMIN_SigMIk8OW7mKDpI7qqFwW\",\n        \"description\": \"Organisation Admin Elective S\",\n        \"createdAt\": {\n            \"date\": \"2019-04-08 14:50:12.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": {\n            \"date\": \"2019-04-08 15:22:23.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"deletedAt\": {\n            \"date\": \"2019-04-08 15:30:42.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"subjectPermissions\": []\n    },\n    {\n        \"id\": \"3FLQjBoNqTjx\",\n        \"name\": \"ORG_EA_ADMIN\",\n        \"description\": \"Organisation Admin Elective\",\n        \"createdAt\": {\n            \"date\": \"2019-04-08 14:54:05.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": {\n            \"date\": \"2019-04-09 15:05:18.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"deletedAt\": null,\n        \"subjectPermissions\": [\n            {\n                \"id\": 20,\n                \"mask\": \"FOO_VIEW\",\n                \"createdAt\": {\n                    \"date\": \"2019-04-09 10:44:09.000000\",\n                    \"timezone_type\": 3,\n                    \"timezone\": \"UTC\"\n                }\n            },\n            {\n                \"id\": 21,\n                \"mask\": \"FOO_EDIT\",\n                \"createdAt\": {\n                    \"date\": \"2019-04-09 10:44:15.000000\",\n                    \"timezone_type\": 3,\n                    \"timezone\": \"UTC\"\n                }\n            },\n            {\n                \"id\": 22,\n                \"mask\": \"KKK_EDIT\",\n                \"createdAt\": {\n                    \"date\": \"2019-04-09 10:44:21.000000\",\n                    \"timezone_type\": 3,\n                    \"timezone\": \"UTC\"\n                }\n            }\n        ]\n    }\n]\n```\n\n### Error Response Codes\n\n`400 - Bad Request`\n```\n{\n    \"message\": \"value for index 0, part 2 (field) must be one of (permissionGroup.id, permissionGroup.name, permissionGroup.createdAt)\",\n    \"code\": 4000101\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/permission-groups/:id",
+              "_postman_id": "6113735b-dc07-4528-bb5b-aba75585f5c6",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "type": "text",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{host}}/v1/permission-groups/{{permissionGroupId}}",
+                "description": "## Reads PermissionGroup details\n\n`GET /v1/permission-groups/:id`\n\nSegment Parameters:\n* **id** (string), required - PermissionGroup id or mask\n\n### Request:\n`GET /v1/permission-groups/cKJ2udklliSW`\n\n### Response - 200 OK:\n```\n{\n    \"id\": \"cKJ2udklliSW\",\n    \"name\": \"ORG_ADMIN\",\n    \"description\": \"Organisation Admin\",\n    \"createdAt\": {\n        \"date\": \"2019-04-09 08:01:23.000000\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"updatedAt\": null,\n    \"deletedAt\": null\n}\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"PermissionGroup not found\",\n    \"code\": 0\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/permission-groups/:id",
+              "_postman_id": "beda6ab7-4bff-41b1-a0d0-d5ea5cb22af4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "type": "text",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"name\": \"ORG_EA_ADMIN_S\",\n\t\"description\": \"Organisation Admin Elective S\"\n}"
+                },
+                "url": "{{host}}/v1/permission-groups/{{permissionGroupId}}",
+                "description": "## Update PermissionGroup in a collection. Applies partial modifications to a PermissionGroup.\n\n`PATCH /v1/permission-groups/:id`\n\nSegment Parameters:\n* **id** (string) - PermissionGroup id or name\n\nPOST Parameters:\n* **name** (string) - PermissionGroup name\n* **description** (string) - PermissionGroup descriptin\n\n### Request:\n`PATCH /v1/permission-groups/cKJ2udklliSW`\n\n```\n{\n\t\"name\": \"ORG_EA_ADMIN_S\",\n\t\"description\": \"Organisation Admin Elective S\"\n}\n```\n\n### Response - 200 OK:\n```\n{\n    \"id\": \"cKJ2udklliSW\",\n    \"name\": \"ORG_EA_ADMIN_S\",\n    \"description\": \"Organisation Admin Elective S\",\n    \"createdAt\": {\n        \"date\": \"2019-04-09 08:01:23.000000\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"updatedAt\": {\n        \"date\": \"2019-04-09 08:44:18.984217\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"deletedAt\": null\n}\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"PermissionGroup not found\",\n    \"code\": 0\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/permission-groups/:id",
+              "_postman_id": "6ac035a1-f45a-4ce3-8167-f0c03ca1f084",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "type": "text",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{host}}/v1/permission-groups/{{permissionGroupId}}",
+                "description": "## Delete PermissionGroup from Collection\n\n`DELETE /v1/permission-groups/:id`\n\nSegment Parameters:\n* **id** (string) - PermissionGroup id\n\n### Request:\n`DELETE /v1/permission-groups/cKJ2udklliSW`\n\n### Response - 200 OK:\n```\n{\n    \"resourceId\": 11,\n    \"message\": \"PermissionGroup has been successfully deleted\"\n}\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"PermissionGroup not found\",\n    \"code\": 0\n}\n```"
+              },
+              "response": []
+            }
+          ],
+          "_postman_id": "87f04ad4-4857-4fe1-b2b0-49d371f2b042",
+          "_postman_isSubFolder": true
+        },
+        {
+          "name": "roles",
+          "item": [
+            {
+              "name": "permission-groups",
+              "item": [
+                {
+                  "name": "/v1/roles/:role/permission-groups",
+                  "_postman_id": "4e664f49-cec0-4e64-874b-17dde3a62c95",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": "{{host}}/v1/roles/{{roleId}}/permission-groups",
+                    "description": "## List PermissionGroup objects for given Role\n\n`GET /v1/roles/:role/permission-groups`\n\n### Request:\n`GET /v1/roles/KMLSaoNqTjx/permission-groups`\n\n### Response - 200 OK:\nX-Results-Total 2\n```\n[\n    {\n        \"id\": \"hywOLEel7uQy\",\n        \"name\": \"foobar\",\n        \"description\": \"Grants user foo and bar permissions\",\n        \"createdAt\": {\n            \"date\": \"2019-04-10 15:43:01.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    },\n    {\n        \"id\": \"QTyq2rRNPRKi\",\n        \"name\": \"ORG_E_ADMIN\",\n        \"description\": \"Organisation Elective Admin\",\n        \"createdAt\": {\n            \"date\": \"2019-04-11 16:00:29.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    }\n]\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"Role not found\",\n    \"code\": 0\n}\n```"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "/v1/roles/:role/permission-groups",
+                  "_postman_id": "028883d0-84a1-4ce6-a99c-daf384f97a2d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": {
+                        "token": "{{token}}"
+                      }
+                    },
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n\t\"permissionGroup\": \"o7KnFg5YPVVA\"\n}"
+                    },
+                    "url": "{{host}}/v1/roles/{{roleId}}/permission-groups",
+                    "description": "## Add PermissionGroup to a collection\n\nThis route is idempotent and only confirms the status of the operation. For example it can be called multiple times with the same details and and will return the same response as long as the given SubjectPermission exists in the collection (regardles if it existed in the collection prior to the operation).\n\n`PUT /v1/roles/:role/permission-groups`\n\nPOST Parameters:\n* **permissionGroup** (string), required - PermissionGroup id to add to collection\n\n### Request:\n`PUT /v1/permission-groups/KMLSaoNqTjx/permission-groups`\n\n```\n{\n\t\"permissionGroup\": \"3FLQjBoNqTjx\"\n}\n```\n\n### Response - 200 OK:\n```\n{\n    \"message\": \"Permission Group in collection\"\n}\n```\n\n### Error Response Codes\n\n`400 - Bad request`\n```\n{\n    \"message\": \"Required parameter \"permissionGroup\" missing\",\n    \"code\": 0\n}\n```"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "/v1/roles/:role/permission-groups/:permission-groups",
+                  "_postman_id": "73d579a9-2350-4da8-b6cb-e24f04eb1e18",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": {
+                        "token": "{{token}}"
+                      }
+                    },
+                    "method": "DELETE",
+                    "header": [],
+                    "url": "{{host}}/v1/roles/{{roleId}}/permission-groups/{{permissionGroupId}}",
+                    "description": "## Remove PermissionGroup from a collection\n\nThis route is idempotent and only confirms the status of the operation. For example it can be called multiple times with the same details and and will return the same response as long as the given PermissionGroup **does not** exists in the collection (regardles if it existed in the collection prior to the operation).\n\n`DELETE /v1/roles/:role/permission-groups/:permission-group`\n\nSegment Parameters:\n* **permission-group** (string), required - PermissionGroup id\n\n### Request:\n`DELETE /v1/roles/KMLSaoNqTjx/permission-groups/3FLQjBoNqTjx`\n\n### Response - 200 OK:\n```\n{\n    \"message\": \"Permission Group not in collection\"\n}\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"PermissionGroup not found\",\n    \"code\": 0\n}\n```"
+                  },
+                  "response": []
+                }
+              ],
+              "_postman_id": "00844aa4-5863-4482-8dbb-b9b4f15f3a10",
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "/v1/roles",
+              "_postman_id": "7b0a1e56-4d8d-4edd-975b-4dd45baa8b6e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "{{token}}"
+                  }
+                },
+                "method": "GET",
+                "header": [],
+                "url": "{{host}}/v1/roles",
+                "description": "## List Role objects\n\n`GET /v1/roles`\n\nGET Parameters:\n* **filters** (array), optional - One or more filters\n* **sorts** (array), optional - One or more sorting parameters\n* **limit** (integer), optional - Limit on the result set\n* **offset** (integer), optional - Offset on the result set\n* **count** (boolean), optional - If set to true Response:X-Results-Total header will show total count in result set (regardless of any limit and offset set)\n\nFilter Types:\n* **role.id**\n* **role.name**\n* **role.description**\n* **role.createdAt**\n* **role.updatedAt**\n* **role.deletedAt**\n\nSort Types:\n* **role.id**\n* **role.name**\n* **role.description**\n* **role.createdAt**\n* **role.updatedAt**\n* **role.deletedAt**\n\n### Request:\n`GET /v1/roles`\n\n### Response - 200 OK:\nX-Results-Total 2\n```\n[\n    {\n        \"id\": \"3979W0xrasea\",\n        \"name\": \"Agent\",\n        \"description\": \"Grants user Agent's permissions\",\n        \"createdAt\": {\n            \"date\": \"2019-04-10 10:35:57.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": {\n            \"date\": \"2019-04-10 14:07:51.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"deletedAt\": null\n    },\n    {\n        \"id\": \"l1RHkh9dCj1P\",\n        \"name\": \"Candidate\",\n        \"description\": \"Grants user Candidate's permissions\",\n        \"createdAt\": {\n            \"date\": \"2019-04-10 10:36:11.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    }\n]\n```\n\n### Error Response Codes\n\n`400 - Bad Request`\n```\n{\n    \"message\": \"value for index 0, part 2 (field) must be one of (role.id, role.name, role.createdAt)\",\n    \"code\": 4000101\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/roles",
+              "_postman_id": "53fe3c10-5b71-4c20-b6e3-d54dd4a8e2d5",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "{{token}}"
+                  }
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"name\": \"Candidate\",\n\t\"description\": \"Grants Candidate permissions\",\n    \"permissionGroups\": [\"CLIENTS_DELETED_ITEMS\", \"CANDIDATES_DELETE\"]\n}",
+                  "options": {
+                    "raw": {}
+                  }
+                },
+                "url": "{{host}}/v1/roles",
+                "description": "## Create a new role in a collection\n\n`POST /v1/roles`\n\nPOST Parameters:\n* **name** (string), required - Name of the Role\n* **description** (string), required - Description of the Role\n\n### Request:\n`POST /v1/roles`\n\n```\n{\n\t\"name\": \"Candidate\",\n\t\"description\": \"Grants Candidate permissions\"\n}\n```\n\n### Response - 201 Created:\n```\n{\n    \"id\": \"3pbO4z4gHYtl\",\n    \"name\": \"Candidate\",\n    \"description\": \"Grants Candidate permissions\",\n    \"createdAt\": {\n        \"date\": \"2019-04-10 14:03:34.632371\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"updatedAt\": null,\n    \"deletedAt\": null\n}\n```\n\n### Error Response Codes\n\n`400 - Bad request`\n```\n{\n    \"message\": \"Required parameter \"name\" missing\",\n    \"code\": 0\n}\n```\n\n`409 - Conflict`\n```\n{\n    \"message\": \"Role with name Candidate already exists\",\n    \"code\": 4090001\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/roles/:id",
+              "_postman_id": "651ccfd3-0709-47d5-b340-40f2c3e8ded0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "{{token}}"
+                  }
+                },
+                "method": "GET",
+                "header": [],
+                "url": "{{host}}/v1/roles/{{roleId}}",
+                "description": "## Reads Role details\n\n`GET /v1/roles/:id`\n\nSegment Parameters:\n* **id** (string), required - Role id\n\n### Request:\n`GET /v1/roles/3979W0xrasea`\n\n### Response - 200 OK:\n```\n{\n    \"id\": \"3979W0xrasea\",\n    \"name\": \"CANDIDATE\",\n    \"description\": \"Assigns Candidate privilages to a user\",\n    \"createdAt\": {\n        \"date\": \"2019-04-10 10:35:57.000000\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"updatedAt\": null,\n    \"deletedAt\": null\n}\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"Role not found\",\n    \"code\": 0\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/roles/:id",
+              "_postman_id": "c611aee6-182a-4040-9d66-4a8fdb347b1c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"name\": \"Agent\",\n\t\"description\": \"Grants user Agent's permissions\"\n}"
+                },
+                "url": "{{host}}/v1/roles/{{roleId}}",
+                "description": "## Update Role in a collection. Applies partial modifications to a Role.\n\n`PATCH /v1/roles/:id`\n\nSegment Parameters:\n* **id** (string) - Role id\n\nPOST Parameters:\n* **name** (string) - Role name\n* **description** (string) - Role descriptin\n\n### Request:\n`PATCH /v1/roles/cKJ2udklliSW`\n\n```\n{\n\t\"name\": \"Agent\",\n\t\"description\": \"Grants user Agent's permissions\"\n}\n```\n\n### Response - 200 OK:\n```\n{\n    \"id\": \"3979W0xrasea\",\n    \"name\": \"Agent\",\n    \"description\": \"Grants user Agent's permissions\",\n    \"createdAt\": {\n        \"date\": \"2019-04-10 10:35:57.000000\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"updatedAt\": {\n        \"date\": \"2019-04-10 14:07:51.855391\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"deletedAt\": null\n}\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"Role not found\",\n    \"code\": 0\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/roles/:id",
+              "_postman_id": "51daf0bb-b4ea-4458-9bce-2f8fbdf9fd5a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": "{{host}}/v1/roles/{{roleId}}",
+                "description": "## Delete Role from Collection\n\n`DELETE /v1/roles/:id`\n\nSegment Parameters:\n* **id** (string) - Role id\n\n### Request:\n`DELETE /v1/roles/cKJ2udklliSW`\n\n### Response - 200 OK:\n```\n{\n    \"resourceId\": cKJ2udklliSW,\n    \"message\": \"Role has been successfully deleted\"\n}\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"Role not found\",\n    \"code\": 0\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/roles/grant",
+              "_postman_id": "a9bb4553-382f-4f60-9747-35a47aa01d03",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "{{token}}"
+                  }
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "type": "text",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"user\": \"scott\",\n\t\"organisation\": \"elective\",\n\t\"role\": \"rjwdqAVzXMqO\"\n}"
+                },
+                "url": "{{host}}/v1/roles/grant",
+                "description": "## Grant a Role to a User within Organisation\n\n`POST /v1/roles/grant`\n\nPOST Parameters:\n* **user** (string), required - User Id or username\n* **organisation** (string), required - Organisation namespace or Id\n* **role** (string), required - Role Id\n* **cascade** (string), optional - Whether to cascade permission. Default true.\n\n### Request:\n`POST /v1/roles/grant`\n\n```\n{\n\t\"user\": \"john.doe\",\n\t\"organisation\": \"acme\",\n\t\"role\": \"RHLrCNsZdCpO\"\n}\n```\n\n### Response - 201 Created:\n```\n{\n\t\"message\": \"Role has been granted\"\n}\n```\n\n### Error Response Codes\n\n`400 - Bad request`\n```\n{\n    \"message\": \"Required parameter \"user\" missing\",\n    \"code\": 400181001\n}\n```\n```\n{\n    \"message\": \"Required parameter \"organisation\" missing\",\n    \"code\": 400181002\n}\n```\n```\n{\n    \"message\": \"Required parameter \"role\" missing\",\n    \"code\": 400181003\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/roles/revoke",
+              "_postman_id": "e841e9ab-a2e9-45b1-b685-295ac6b4ef16",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "{{token}}"
+                  }
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"user\": \"scott\",\n\t\"organisation\": \"elective\",\n\t\"role\": \"rjwdqAVzXMqO\"\n}"
+                },
+                "url": "{{host}}/v1/roles/revoke",
+                "description": "## Revoke User's Role within Organisation\n\n`DELETE /v1/roles/revoke`\n\nPOST Parameters:\n* **user** (string), required - User Id or username\n* **organisation** (string), required - Organisation namespace or Id\n* **role** (string), required - Role Id\n* **cascade** (string), optional - Whether to cascade permission. Default true.\n\n### Request:\n`DELETE /v1/roles/revoke`\n\n```\n{\n\t\"user\": \"john.doe\",\n\t\"organisation\": \"acme\",\n\t\"role\": \"RHLrCNsZdCpO\"\n}\n```\n\n### Response - 201 Created:\n```\n{\n\t\"message\": \"Role has been revoked\"\n}\n```\n\n### Error Response Codes\n\n`400 - Bad request`\n```\n{\n    \"message\": \"Required parameter \"user\" missing\",\n    \"code\": 400181001\n}\n```\n```\n{\n    \"message\": \"Required parameter \"organisation\" missing\",\n    \"code\": 400181002\n}\n```\n```\n{\n    \"message\": \"Required parameter \"role\" missing\",\n    \"code\": 400181003\n}\n```"
+              },
+              "response": []
+            }
+          ],
+          "_postman_id": "150e18ca-24be-481a-894a-cfd9e04fb9f4",
+          "_postman_isSubFolder": true
+        },
+        {
+          "name": "organisations",
+          "item": [
+            {
+              "name": "service-accounts",
+              "item": [
+                {
+                  "name": "tokens",
+                  "item": [
+                    {
+                      "name": "/v1/organisations/:id/service-accounts/:serviceAccount/tokens",
+                      "_postman_id": "0a0060ea-4ede-4d4e-9a7c-ec7e8e1d6b80",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "name": "Content-Type",
+                            "type": "text",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": "{{host}}/v1/organisations/{{oId}}/service-accounts/{{sAId}}/tokens"
+                      },
+                      "response": []
+                    },
+                    {
+                      "name": "/v1/organisations/:id/service-accounts/:serviceAccount/tokens",
+                      "_postman_id": "b66ecced-bac5-46f2-8025-e3cf96811ea1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "name": "Content-Type",
+                            "type": "text",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": "{{host}}/v1/organisations/{{oId}}/service-accounts/{{sAId}}/tokens"
+                      },
+                      "response": []
+                    },
+                    {
+                      "name": "/v1/organisations/:id/service-accounts/:serviceAccount/tokens/:token",
+                      "_postman_id": "253d5cd5-0ecc-42fa-9573-c11a58f94d66",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "name": "Content-Type",
+                            "type": "text",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": "{{host}}/v1/organisations/{{oId}}/service-accounts/{{sAId}}/tokens/{{tId}}"
+                      },
+                      "response": []
+                    }
+                  ],
+                  "_postman_id": "d7365ea2-b3d8-4829-9b39-07dae66640a3",
+                  "_postman_isSubFolder": true
+                },
+                {
+                  "name": "/v1/organisations/:id/service-accounts",
+                  "_postman_id": "6d78443c-6131-4433-92ae-14c51f80299a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n\t\"name\": \"integration-create-service-account\",\n\t\"description\": \"Allows to create integration\",\n    \"role\": \"db2aq4IGoVAQ\"\n}",
+                      "options": {
+                        "raw": {}
+                      }
+                    },
+                    "url": {
+                      "raw": "{{host}}/v1/organisations/{{oId}}/service-accounts",
+                      "host": [
+                        "{{host}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "organisations",
+                        "{{oId}}",
+                        "service-accounts"
+                      ],
+                      "query": [
+                        {
+                          "key": "detailed",
+                          "value": "true",
+                          "disabled": true
+                        },
+                        {
+                          "key": "create-token",
+                          "value": "true",
+                          "disabled": true
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "6a5e7ba8-5b01-46e3-84c8-d6247a988f3e",
+                      "name": "/v1/organisations/:id/service-accounts",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "name": "Content-Type",
+                            "value": "application/json",
+                            "type": "text"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n\t\"name\": \"acme\",\n\t\"description\": \"Allows to access Acme resources\"\n}"
+                        },
+                        "url": {
+                          "raw": "https://9f9210a2-7924-4358-9225-0fd21e8025ec.mock.pstmn.io/v1/organisations/TofXCsfNzQgu/service-accounts?detailed=true&create-token=true",
+                          "protocol": "https",
+                          "host": [
+                            "9f9210a2-7924-4358-9225-0fd21e8025ec",
+                            "mock",
+                            "pstmn",
+                            "io"
+                          ],
+                          "path": [
+                            "v1",
+                            "organisations",
+                            "TofXCsfNzQgu",
+                            "service-accounts"
+                          ],
+                          "query": [
+                            {
+                              "key": "detailed",
+                              "value": "true"
+                            },
+                            {
+                              "key": "create-token",
+                              "value": "true"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Server",
+                          "value": "nginx/1.19.10"
+                        },
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        },
+                        {
+                          "key": "Transfer-Encoding",
+                          "value": "chunked"
+                        },
+                        {
+                          "key": "Cache-Control",
+                          "value": "no-cache, private"
+                        },
+                        {
+                          "key": "Date",
+                          "value": "Thu, 06 May 2021 14:50:06 GMT"
+                        },
+                        {
+                          "key": "Access-Control-Allow-Origin",
+                          "value": "*"
+                        },
+                        {
+                          "key": "X-Content-Type-Options",
+                          "value": "nosniff"
+                        },
+                        {
+                          "key": "Access-Control-Allow-Methods",
+                          "value": "POST, GET, OPTIONS, PATCH, PUT, DELETE"
+                        },
+                        {
+                          "key": "Access-Control-Allow-Headers",
+                          "value": "Content-Type, X-Auth-Token, X-App-Token, Authorization"
+                        },
+                        {
+                          "key": "Access-Control-Expose-Headers",
+                          "value": "X-Auth-Token-Expires-In, X-Results-Total"
+                        },
+                        {
+                          "key": "X-Service-Name",
+                          "value": "integrations-api"
+                        },
+                        {
+                          "key": "Via",
+                          "value": "1.1 google"
+                        },
+                        {
+                          "key": "Alt-Svc",
+                          "value": "clear"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n    \"id\": \"xjdypFEvkemQ\",\n    \"name\": \"acme\",\n    \"description\": \"Allows to access Acme resources\",\n    \"createdAt\": {\n        \"date\": \"2021-05-24 09:22:21.000000\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"updatedAt\": null,\n    \"deletedAt\": null,\n    \"userId\": \"0MxfmlJZzCFK\",\n    \"isActive\": true,\n    \"email\": \"serviceaccount+xjdypFEvkemQ@recii.io\",\n    \"tokens\": [\n        {\n            \"id\": \"xN22rZ6FGhLh\",\n            \"key\": \"BiHrmQcWet06pXJh1SkGhr10ZrDAuRB9\",\n            \"token\": null,\n            \"createdAt\": {\n                \"date\": \"2021-05-24 09:22:32.000000\",\n                \"timezone_type\": 3,\n                \"timezone\": \"UTC\"\n            },\n            \"updatedAt\": null,\n            \"deletedAt\": null\n        }\n    ]\n}"
+                    }
+                  ]
+                },
+                {
+                  "name": "/v1/organisations/:id/service-accounts/:serviceAccount",
+                  "_postman_id": "b9023a57-c3e7-4956-94dd-d5e333968e2d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n\t\"name\": \"acme-uk\",\n\t\"description\": \"Allows to access Acme-UK resources\"\n}"
+                    },
+                    "url": "{{host}}/v1/organisations/{{oId}}/service-accounts/{{sAId}}"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "/v1/organisations/:id/service-accounts/:serviceAccount",
+                  "_postman_id": "1afbe52e-fd98-4555-acab-316cb27d1eb1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": "{{host}}/v1/organisations/{{oId}}/service-accounts/{{sAId}}"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "/v1/organisations/:id/service-accounts/:serviceAccount/disable",
+                  "_postman_id": "aef4e284-266c-40ff-a1f2-15c2cb480039",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": "{{host}}/v1/organisations/{{oId}}/service-accounts/{{sAId}}/disable"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "/v1/organisations/:id/service-accounts/:serviceAccount/enable",
+                  "_postman_id": "ac5ca930-1077-4880-84c2-91bcec03f8f5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": "{{host}}/v1/organisations/{{oId}}/service-accounts/{{sAId}}/enable"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "/v1/organisations/:id/service-accounts/:serviceAccount/grant",
+                  "_postman_id": "0110b968-7ed4-4d45-8286-f65ab5cfb88d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n\t\"role\": \"FdTOOoSafGCZ\"\n}",
+                      "options": {
+                        "raw": {}
+                      }
+                    },
+                    "url": "{{host}}/v1/organisations/{{oId}}/service-accounts/{{sAId}}/grant"
+                  },
+                  "response": [
+                    {
+                      "id": "6729f058-3e48-4a80-a610-547fcc3118d0",
+                      "name": "/v1/organisations/:id/service-accounts/:serviceAccount/grant",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "name": "Content-Type",
+                            "value": "application/json",
+                            "type": "text"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n\t\"role\": \"FdTOOoSafGCZ\"\n}"
+                        },
+                        "url": "https://9f9210a2-7924-4358-9225-0fd21e8025ec.mock.pstmn.io/v1/organisations/TofXCsfNzQgu/service-accounts/4kPZmqimd91i/grant"
+                      },
+                      "_postman_previewlanguage": null,
+                      "header": null,
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null
+                    }
+                  ]
+                },
+                {
+                  "name": "/v1/organisations/:id/service-accounts/:serviceAccount/revoke",
+                  "_postman_id": "bfc5c3a7-75ff-46ff-9cc8-d5c5ac66ab9b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n\t\"role\": \"FdTOOoSafGCZ\"\n}"
+                    },
+                    "url": "{{host}}/v1/organisations/{{oId}}/service-accounts/{{sAId}}/revoke"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "/v1/organisations/:id/service-accounts/:serviceAccount",
+                  "_postman_id": "9260c757-ef3e-4269-a03c-497013ad31d9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": "{{host}}/v1/organisations/{{oId}}/service-accounts/{{sAId}}"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "/v1/organisations/:id/service-accounts",
+                  "_postman_id": "8109c686-4063-4e6d-b176-6b9df82104d5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": {
+                        "token": "{{token}}"
+                      }
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": "{{host}}/v1/organisations/{{oId}}/service-accounts"
+                  },
+                  "response": []
+                }
+              ],
+              "_postman_id": "49cdf331-b8b8-436c-8968-ce631e61450c",
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "descendants",
+              "item": [
+                {
+                  "name": "/v1/organisations/:id/descendants",
+                  "_postman_id": "4968b95f-0373-4b95-b97e-60485cee16a6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": {
+                        "token": "{{token}}"
+                      }
+                    },
+                    "method": "GET",
+                    "header": [],
+                    "url": "{{host}}/v1/organisations/{{oId}}/descendants",
+                    "description": "## List descendants Organisations for given Organisation. Descendant is an every child and child of that child and so on.\n\n`GET /v1/organisations/:id/descendants`\n\nRequires Permissions:\n* `view` on `ORGANISATION` subject to list Organisation descendants.\n* User must belong to `id` Organisation\n\n### Request:\n`GET /v1/organisations/123/descendants`\n\n### Response - 200 OK:\nX-Results-Total 7\n```\n[\n    {\n        \"id\": 4,\n        \"name\": \"acme uk\",\n        \"namespace\": \"acmeuk\",\n        \"description\": \"acme uk ltd\",\n        \"createdAt\": {\n            \"date\": \"2019-04-12 16:12:34.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    },\n    {\n        \"id\": 11,\n        \"name\": \"acme uk london\",\n        \"namespace\": \"acmeuklondon\",\n        \"description\": \"Acme UK London Ltd\",\n        \"createdAt\": {\n            \"date\": \"2019-04-15 10:57:26.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    },\n    {\n        \"id\": 15,\n        \"name\": \"acme uk london pimlico\",\n        \"namespace\": \"acmeuklondonpimlico\",\n        \"description\": \"Acme UK London Pimlico Ltd\",\n        \"createdAt\": {\n            \"date\": \"2019-04-15 10:58:40.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    },\n    {\n        \"id\": 12,\n        \"name\": \"acme uk leeds\",\n        \"namespace\": \"acmeukleeds\",\n        \"description\": \"Acme UK Leeds Ltd\",\n        \"createdAt\": {\n            \"date\": \"2019-04-15 10:57:40.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    },\n    {\n        \"id\": 13,\n        \"name\": \"acme uk brighton\",\n        \"namespace\": \"acmeukbrighton\",\n        \"description\": \"Acme UK Brighton Ltd\",\n        \"createdAt\": {\n            \"date\": \"2019-04-15 10:57:55.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    },\n    {\n        \"id\": 14,\n        \"name\": \"acme uk bristol\",\n        \"namespace\": \"acmeukbristol\",\n        \"description\": \"Acme UK Bristol Ltd\",\n        \"createdAt\": {\n            \"date\": \"2019-04-15 10:58:12.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    },\n    {\n        \"id\": 7,\n        \"name\": \"acme fr\",\n        \"namespace\": \"acmefr\",\n        \"description\": \"Acme France Ltd\",\n        \"createdAt\": {\n            \"date\": \"2019-04-15 10:54:22.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    }\n]\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"Organisation not found\",\n    \"code\": 0\n}\n```"
+                  },
+                  "response": []
+                }
+              ],
+              "_postman_id": "d72e27d2-2def-4a30-a21b-beb0eee2161c",
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "users",
+              "item": [
+                {
+                  "name": "/v1/organisations/:id/users",
+                  "_postman_id": "35d9342c-ba90-494a-a2c8-65c95e7c25bb",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": {
+                        "token": "{{token}}"
+                      }
+                    },
+                    "method": "GET",
+                    "header": [],
+                    "url": "{{host}}/v1/organisations/{{oId}}/users",
+                    "description": "## List Organisation Users objects\n\n`GET /v1/organisations/:id/users`\n\nRequires Permissions:\n* `view` on `USER` subject Organisation users.\n* User must belong to `id` Organisation\n\nSegment Parameters:\n* **id** (string), required - Organisation ID\n\nGET Parameters:\n* **filters** (array), optional - One or more filters\n* **sorts** (array), optional - One or more sorting parameters\n* **limit** (integer), optional - Limit on the result set\n* **offset** (integer), optional - Offset on the result set\n* **count** (boolean), optional - If set to true Response:X-Results-Total header will show total count in result set (regardless of any limit and offset set)\n* **detailed** (boolean), optional - If set to true `Nested Entities` will be included in the response. Default: false.\n* **inherited** (boolean), optional - If set to true inherited (ancestors) Users will be included in the response, otherwise only Users that belong to this organsiation will be listed. Default: false.\n\nFilter Types:\n* **user.id**\n* **user.username**\n* **user.firstName**\n* **user.lastName**\n* **user.isActive**\n* **user.createdAt**\n* **user.updatedAt**\n* **user.deletedAt**\n\nSort Types:\n* **user.id**\n* **user.username**\n* **user.firstName**\n* **user.lastName**\n* **user.isActive**\n* **user.createdAt**\n* **user.updatedAt**\n* **user.deletedAt**\n\n### Request:\n`GET /v1/organisations/123/users`\n\n### Response - 200 OK:\nX-Results-Total 2\n```\n[\n    {\n        \"id\": \"FLmLQ4VLWjHG\",\n        \"username\": \"john.doe\",\n        \"firstName\": John,\n        \"lastName\": Doe,\n        \"createdAt\": {\n            \"date\": \"2019-04-18 13:05:09.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    },\n    {\n        \"id\": \"bjlIfe4sdyzL\",\n        \"username\": \"jane\",\n        \"firstName\": Jane,\n        \"lastName\": Doe,\n        \"createdAt\": {\n            \"date\": \"2019-04-18 13:05:41.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    }\n]\n```\n\n### Error Response Codes\n\n`400 - Bad Request`\n```\n{\n    \"message\": \"value for index 0, part 2 (field) must be one of (organisation.id, organisation.name, organisation.createdAt)\",\n    \"code\": 4000101\n}\n```"
+                  },
+                  "response": []
+                }
+              ],
+              "_postman_id": "8f64cd90-a091-41c4-8ba5-500c5c3eaba5",
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "/v1/organisations",
+              "_postman_id": "3ca25336-c639-4358-ae2c-8f2a25c419bc",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "{{token}}"
+                  }
+                },
+                "method": "GET",
+                "header": [],
+                "url": "{{host}}/v1/organisations",
+                "description": "## List Organisation objects\n\n`GET /v1/organisations`\n\nRequires Permissions:\n* `view` on `ORGANISATION` subject to list Organisations. Deleted Organisations will not be listed.\n* `undelete` on `ORGANISATION` subject to include deleted Organisations\n\nGET Parameters:\n* **filters** (array), optional - One or more filters\n* **sorts** (array), optional - One or more sorting parameters\n* **limit** (integer), optional - Limit on the result set\n* **offset** (integer), optional - Offset on the result set\n* **count** (boolean), optional - If set to true Response:X-Results-Total header will show total count in result set (regardless of any limit and offset set)\n* **detailed** (boolean), optional - If set to true `Nested Entities` will be included in the response. Default: false.\n\nFilter Types:\n* **organisation.id**\n* **organisation.name**\n* **organisation.namespace**\n* **organisation.description**\n* **organisation.createdAt**\n* **organisation.updatedAt**\n* **organisation.deletedAt**\n* **organisationProfile.id**\n* **organisationProfile.firstName**\n* **organisationProfile.lastName**\n* **organisationProfile.email**\n* **organisationProfile.linkedIn**\n* **organisationProfile.website**\n\nSort Types:\n* **organisation.id**\n* **organisation.name**\n* **organisation.namespace**\n* **organisation.description**\n* **organisation.createdAt**\n* **organisation.updatedAt**\n* **organisation.deletedAt**\n* **organisationProfile.id**\n* **organisationProfile.firstName**\n* **organisationProfile.lastName**\n* **organisationProfile.email**\n* **organisationProfile.linkedIn**\n* **organisationProfile.website**\n\n### Request:\n`GET /v1/organisations`\n\n### Response - 200 OK:\nX-Results-Total 2\n```\n[\n    {\n        \"id\": 7,\n        \"name\": \"acme fr\",\n        \"namespace\": \"acmefr\",\n        \"description\": \"Acme France Ltd\",\n        \"createdAt\": {\n            \"date\": \"2019-04-15 10:54:22.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    },\n    {\n        \"id\": 18,\n        \"name\": \"acme itally\",\n        \"namespace\": \"acmeitally\",\n        \"description\": null,\n        \"createdAt\": {\n            \"date\": \"2019-04-15 12:58:51.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    }\n]\n```\n\n### Error Response Codes\n\n`400 - Bad Request`\n```\n{\n    \"message\": \"value for index 0, part 2 (field) must be one of (organisation.id, organisation.name, organisation.createdAt)\",\n    \"code\": 4000101\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/organisations",
+              "_postman_id": "b5ec1692-46fa-499b-8c9e-45a140d3c9c1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "{{token}}"
+                  }
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "type": "text",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"name\": \"Acme Twyford\",\n\t\"description\": \"Acme Twyford Ltd\",\n    \"parent\": \"elective\",\n    \"cascade\": true\n}",
+                  "options": {
+                    "raw": {}
+                  }
+                },
+                "url": "{{host}}/v1/organisations",
+                "description": "## Create a new organisation in a collection\n\n`POST /v1/organisations`\n\nRequires Permissions:\n* `create` on `ORGANISATION` subject to create Organisations.\n\nPOST Parameters:\n* **name** (string), required - Name of the Organisation\n* **namespace** (string), optional - Namespace of the Organisation\n* **description** (string), optional - Description of the Organisation\n* **parent** (string), optional - Id of the parent Organisation\n* **profile** (object), optional - Profile object representing Organisation contact information\n* **cascade** (boolean), optional - If set to true all Users and their permissions from parent Organisations will be coppied to new Organisation. Default false.\n\nProfile Object\n* **firstName** (string, 64), optional - Contact First Name\n* **lastName** (string, 64), optional - Contact Last Name\n* **email** (string, 128), optional - Contact Email address\n* **linkedIn** (string, 255), optional - LinkedIn profile\n* **website** (string, 255), optional - Website URL\n* **introduction** (string), optional - Chatbot introduction\n\n### Request:\n`POST /v1/organisations`\n\n```\n{\n\t\"name\": \"Acme\",\n\t\"description\": \"Acme Inc.\",\n    \"profile\": {\n\t    \"firstName\": \"John\",\n\t    \"lastName\": \"Doe\",\n\t    \"email\": \"john.deo@example.com\",\n\t    \"linkedIn\": \"https://www.linkedin.com/company/acme/about\",\n\t    \"website\": \"https://acme.com\",\n\t    \"introduction\": \"Hi my name is Ali I am calling on behalf of Acme\"\n\t}\n}\n```\n\n### Response - 201 Created:\n```\n{\n    \"id\": 1,\n    \"name\": \"Acme\",\n    \"namespace\": \"acme\",\n    \"description\": \"Acme Inc\",\n    \"createdAt\": {\n        \"date\": \"2019-04-16 09:37:50.602665\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"updatedAt\": null,\n    \"deletedAt\": null,\n    \"parent\": null,\n    \"children\": [],\n    \"profile\": {\n\t    \"firstName\": \"John\",\n\t    \"lastName\": \"Doe\",\n\t    \"email\": \"john.deo@example.com\",\n\t    \"linkedIn\": \"https://www.linkedin.com/company/acme/about\",\n\t    \"website\": \"https://acme.com\",\n\t    \"introduction\": \"Hi my name is Ali I am calling on behalf of Acme\"\n\t}\n}\n```\n\n### Error Response Codes\n\n`400 - Bad request`\n```\n{\n    \"message\": \"Required parameter \"name\" missing\",\n    \"code\": 0\n}\n```\n\n`409 - Conflict`\n```\n{\n    \"message\": \"Organisation with namespace acme already exists\",\n    \"code\": 4090001\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/organisations/:id",
+              "_postman_id": "635e3aa6-1f21-4829-a724-bcb08341033e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "{{token}}"
+                  }
+                },
+                "method": "GET",
+                "header": [],
+                "url": "{{host}}/v1/organisations/{{oId}}",
+                "description": "## Reads Organisation details\n\n`GET /v1/organisations/:id`\n\nRequires Permissions:\n* `view` on `ORGANISATION` subject to show Organisation details. Deleted Organisation will not be shown.\n* `undelete` on `ORGANISATION` subject to show details of the deleted Organisation.\n* User must belong to `id` Organisation\n\nSegment Parameters:\n* **namespace** (string), required - Organisation namespace\n\n### Request:\n`GET /v1/organisations/123`\n\n### Response - 200 OK:\n```\n{\n    \"id\": 123,\n    \"name\": \"Acme\",\n    \"namespace\": \"acme\",\n    \"description\": Acme Inc.,\n    \"createdAt\": {\n        \"date\": \"2019-04-12 16:05:04.000000\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"updatedAt\": {\n        \"date\": \"2019-04-15 08:48:19.000000\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"deletedAt\": null,\n    \"parent\": null,\n    \"children\": [\n        {\n            \"id\": 4,\n            \"name\": \"acme uk\",\n            \"namespace\": \"acmeuk\",\n            \"description\": \"acme uk ltd\",\n            \"createdAt\": {\n                \"date\": \"2019-04-12 16:12:34.000000\",\n                \"timezone_type\": 3,\n                \"timezone\": \"UTC\"\n            },\n            \"updatedAt\": null,\n            \"deletedAt\": null\n        },\n        {\n            \"id\": 7,\n            \"name\": \"acme fr\",\n            \"namespace\": \"acmefr\",\n            \"description\": \"Acme France Ltd\",\n            \"createdAt\": {\n                \"date\": \"2019-04-15 10:54:22.000000\",\n                \"timezone_type\": 3,\n                \"timezone\": \"UTC\"\n            },\n            \"updatedAt\": null,\n            \"deletedAt\": null\n        },\n        {\n            \"id\": 9,\n            \"name\": \"acme pr\",\n            \"namespace\": \"acmepr\",\n            \"description\": \"Acme Portugal Ltd\",\n            \"createdAt\": {\n                \"date\": \"2019-04-15 10:56:36.000000\",\n                \"timezone_type\": 3,\n                \"timezone\": \"UTC\"\n            },\n            \"updatedAt\": null,\n            \"deletedAt\": null\n        },\n        {\n            \"id\": 10,\n            \"name\": \"acme nl\",\n            \"namespace\": \"acmenl\",\n            \"description\": \"Acme Holland Ltd\",\n            \"createdAt\": {\n                \"date\": \"2019-04-15 10:56:50.000000\",\n                \"timezone_type\": 3,\n                \"timezone\": \"UTC\"\n            },\n            \"updatedAt\": null,\n            \"deletedAt\": null\n        }\n    ],\n    \"profile\": {\n\t    \"firstName\": \"John\",\n\t    \"lastName\": \"Doe\",\n\t    \"email\": \"john.deo@example.com\",\n\t    \"linkedIn\": \"https://www.linkedin.com/company/acme/about\",\n\t    \"website\": \"https://acme.com\",\n\t    \"introduction\": \"Hi my name is Ali I am calling on behalf of Acme\"\n\t}\n}\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"Organisation not found\",\n    \"code\": 0\n}\n```"
+              },
+              "response": [
+                {
+                  "id": "7feca2ab-ba5f-4680-9c75-54e1d3879d53",
+                  "name": "/v1/organisations/:id",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": "https://9f9210a2-7924-4358-9225-0fd21e8025ec.mock.pstmn.io/v1/organisations/jZFyO8GLIZiQ"
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Server",
+                      "value": "nginx/1.17.0"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Transfer-Encoding",
+                      "value": "chunked"
+                    },
+                    {
+                      "key": "Cache-Control",
+                      "value": "no-cache, private"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 01 Jul 2019 14:55:38 GMT"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "X-Content-Type-Options",
+                      "value": "nosniff"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, GET, OPTIONS, PATCH, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, X-Auth-Token, X-App-Token, Authorization"
+                    },
+                    {
+                      "key": "Access-Control-Expose-Headers",
+                      "value": "X-Auth-Token-Expires-In, X-Results-Total"
+                    },
+                    {
+                      "key": "X-Service-Name",
+                      "value": "acl-api"
+                    },
+                    {
+                      "key": "Via",
+                      "value": "1.1 google"
+                    },
+                    {
+                      "key": "Alt-Svc",
+                      "value": "clear"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n    \"id\": \"jZFyO8GLIZiQ\",\n    \"name\": \"Elective\",\n    \"namespace\": \"elective\",\n    \"description\": \"Our home!\",\n    \"createdAt\": {\n        \"date\": \"2019-06-10 15:42:15.000000\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"updatedAt\": {\n        \"date\": \"2019-06-26 11:45:12.000000\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"deletedAt\": null,\n    \"parent\": {\n        \"id\": 4,\n        \"name\": \"Elective\",\n        \"namespace\": \"elective\",\n        \"description\": \"Automated, AI-driven, identification, assessment and profiling technology for the recruitment industry\",\n        \"createdAt\": {\n            \"date\": \"2019-04-16 20:26:02.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": {\n            \"date\": \"2019-06-24 09:57:16.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"deletedAt\": null\n    },\n    \"children\": [],\n    \"profile\": {\n        \"firstName\": null,\n        \"lastName\": null,\n        \"email\": null,\n        \"linkedIn\": null,\n        \"website\": null,\n        \"introduction\": null\n    },\n    \"brandColour\": \"red\",\n    \"logo\": null\n}"
+                },
+                {
+                  "id": "3a296fa5-4e87-4c6e-b984-f54a571f3f49",
+                  "name": "/v1/organisations/:namespace",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": "{{host}}/v1/organisations/elective"
+                  },
+                  "_postman_previewlanguage": "json",
+                  "header": null,
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n    \"id\": \"TofXCsfNzQgu\",\n    \"name\": \"Elective\",\n    \"namespace\": \"elective\",\n    \"description\": \"Our home!\",\n    \"createdAt\": {\n        \"date\": \"2019-06-10 15:42:15.000000\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"updatedAt\": {\n        \"date\": \"2019-06-26 11:45:12.000000\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"deletedAt\": null,\n    \"parent\": {\n        \"id\": 4,\n        \"name\": \"Elective\",\n        \"namespace\": \"elective\",\n        \"description\": \"Automated, AI-driven, identification, assessment and profiling technology for the recruitment industry\",\n        \"createdAt\": {\n            \"date\": \"2019-04-16 20:26:02.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": {\n            \"date\": \"2019-06-24 09:57:16.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"deletedAt\": null\n    },\n    \"children\": [],\n    \"profile\": {\n        \"firstName\": null,\n        \"lastName\": null,\n        \"email\": null,\n        \"linkedIn\": null,\n        \"website\": null,\n        \"introduction\": null\n    },\n    \"brandColour\": \"red\",\n    \"logo\": null\n}"
+                }
+              ]
+            },
+            {
+              "name": "/v1/organisations/:id",
+              "_postman_id": "4f53df11-b3de-40bb-92ef-517bff6ebedb",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"name\": \"Acme Universe\",\n\t\"namespace\": \"acmeuniverse\",\n\t\"description\": \"Acme to infinity and beyond\",\n    \"profile\": {\n\t    \"firstName\": \"John\",\n\t    \"lastName\": \"Doe\",\n\t    \"email\": \"john.deo@example.com\",\n\t    \"linkedIn\": \"https://www.linkedin.com/company/acme/about\",\n\t    \"website\": \"https://acme.com\",\n\t    \"introduction\": \"Hi my name is Ali I am calling on behalf of Acme\",\n        \"supportWebsite\": \"https://acme.com\",\n        \"supportEmail\": \"john.deo@example.com\",\n        \"supportPhone\": \"+4413123124124\",\n        \"privacy\": \"www.someUrl.com\"\n\t}\n}",
+                  "options": {
+                    "raw": {}
+                  }
+                },
+                "url": "{{host}}/v1/organisations/{{oId}}",
+                "description": "## Update Organisation in a collection. Applies partial modifications to a Organisation.\n\n`PATCH /v1/organisations/:id`\n\nRequires Permissions:\n* `edit` on `ORGANISATION` subject to edit Organisation details. Deleted Organisation will not be editable.\n* `undelete` on `ORGANISATION` subject to edit details of the deleted Organisation.\n* User must belong to `id` Organisation\n\nSegment Parameters:\n* **id** (string) - Organisation ID\n\nPOST Parameters:\n* **name** (string) - Organisation name\n* **namespace** (string) - Organisation namespace\n* **description** (string) - Organisation descriptin\n\n### Request:\n`PATCH /v1/organisations/123`\n\n```\n{\n\t\"name\": \"Acme Universe\",\n\t\"namespace\": \"acmeuniverse\",\n\t\"description\": \"Acme to infinity and beyond\"\n}\n```\n\n### Response - 200 OK:\n```\n{\n    \"id\": 123,\n    \"name\": \"Acme Universe\",\n    \"namespace\": \"acmeuniverse\",\n    \"description\": \"Acme to infinity and beyond\",\n    \"createdAt\": {\n        \"date\": \"2019-04-12 16:05:04.000000\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"updatedAt\": {\n        \"date\": \"2019-04-16 09:48:59.429461\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"deletedAt\": null,\n    \"parent\": null,\n    \"children\": [\n        {\n            \"id\": 4,\n            \"name\": \"acme uk\",\n            \"namespace\": \"acmeuk\",\n            \"description\": \"acme uk ltd\",\n            \"createdAt\": {\n                \"date\": \"2019-04-12 16:12:34.000000\",\n                \"timezone_type\": 3,\n                \"timezone\": \"UTC\"\n            },\n            \"updatedAt\": null,\n            \"deletedAt\": null\n        },\n        {\n            \"id\": 7,\n            \"name\": \"acme fr\",\n            \"namespace\": \"acmefr\",\n            \"description\": \"Acme France Ltd\",\n            \"createdAt\": {\n                \"date\": \"2019-04-15 10:54:22.000000\",\n                \"timezone_type\": 3,\n                \"timezone\": \"UTC\"\n            },\n            \"updatedAt\": null,\n            \"deletedAt\": null\n        }\n    ],\n    \"profile\": {\n\t    \"firstName\": \"John\",\n\t    \"lastName\": \"Doe\",\n\t    \"email\": \"john.deo@example.com\",\n\t    \"linkedIn\": \"https://www.linkedin.com/company/acme/about\",\n\t    \"website\": \"https://acme.com\",\n\t    \"introduction\": \"Hi my name is Ali I am calling on behalf of Acme\"\n\t}\n}\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"Organisation not found\",\n    \"code\": 0\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/organisations/:id",
+              "_postman_id": "92a84913-2a89-4c20-9f9d-bb210c2bf0a5",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "{{token}}"
+                  }
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": "{{host}}/v1/organisations/{{oId}}",
+                "description": "## Delete Organisation from Collection\n\n`DELETE /v1/organisations/:id`\n\nRequires Permissions:\n* `delete` on `ORGANISATION` subject to delete Organisation.\n* User must belong to `id` Organisation\n\nSegment Parameters:\n* **id** (string) - Organisation ID\n\n### Request:\n`DELETE /v1/organisations/123`\n\n### Response - 200 OK:\n```\n{\n    \"resourceId\": 123,\n    \"message\": \"Organisation has been successfully deleted\"\n}\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"Organisation not found\",\n    \"code\": 0\n}\n```"
+              },
+              "response": []
+            }
+          ],
+          "_postman_id": "9af12937-780b-4aa0-933f-1a5416bc6284",
+          "_postman_isSubFolder": true
+        },
+        {
+          "name": "users",
+          "item": [
+            {
+              "name": "activation",
+              "item": [
+                {
+                  "name": "/v1/users/:userSpec/deactivate",
+                  "_postman_id": "095bb14a-d3fd-4c91-905b-80ed6cce3730",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n\t\"primaryEmail\": \"t8CtR58KjkTx\"\n}"
+                    },
+                    "url": "{{host}}/v1/users/{{username}}/deactivate",
+                    "description": "## Marks User as inactive\n\nThis route is idempotent and only confirms the status of the operation. For example it can be called multiple times and it will return the same response as long as the given User is inactive.\n\n`GET /v1/users/:userSpec/deactivate`\n\nSegment Parameters:\n* **userSpec** (string), required - Username or Id\n\n### Request:\n`GET /v1/users/3979W0xrasea/deactivate` | `GET /v1/users/john.doe/deactivate`\n\n### Response - 204 No Content\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"User not found\",\n    \"code\": 404180801\n}\n```"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "/v1/users/:userSpec/activate",
+                  "_postman_id": "d051237a-0dd5-4d76-b216-a0f07c772d8e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n\t\"primaryEmail\": \"t8CtR58KjkTx\"\n}"
+                    },
+                    "url": "{{host}}/v1/users/{{username}}/activate",
+                    "description": "## Marks User as active\n\nThis route is idempotent and only confirms the status of the operation. For example it can be called multiple times and it will return the same response as long as the given User is active.\n\n`GET /v1/users/:userSpec/activate`\n\nSegment Parameters:\n* **userSpec** (string), required - Username or Id\n\n### Request:\n`GET /v1/users/3979W0xrasea/activate` | `GET /v1/users/john.doe/activate`\n\n### Response - 204 No Content\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"User not found\",\n    \"code\": 404180801\n}\n```"
+                  },
+                  "response": []
+                }
+              ],
+              "_postman_id": "114d8d7c-1d48-408d-96fd-163bbd9bcfc0",
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "emails",
+              "item": [
+                {
+                  "name": "/v1/users/:user/emails",
+                  "_postman_id": "1bd09b3b-a2b5-4d1f-a0bc-a30201119d0e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": {
+                        "token": "{{token}}"
+                      }
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n\t\"email\": \"jane.doe@example.net\"\n}"
+                    },
+                    "url": "{{host}}/v1/users/{{userId}}/emails",
+                    "description": "## List User's Email objects\n\n`GET /v1/users/:userSpec/emails`\n\nSegment Parameters:\n* **userSpec** (string), required - User's username or Id\n\nGET Parameters:\n* **filters** (array), optional - One or more filters\n* **sorts** (array), optional - One or more sorting parameters\n* **limit** (integer), optional - Limit on the result set\n* **offset** (integer), optional - Offset on the result set\n* **count** (boolean), optional - If set to true Response:X-Results-Total header will show total count in result set (regardless of any limit and offset set)\n* **detailed** (boolean), optional - If set to true `Nested Entities` will be included in the response. Default: false.\n\nFilter Types:\n* **email.id**\n* **email.email**\n* **email.confirmedAt**\n* **email.createdAt**\n* **email.updatedAt**\n* **email.deletedAt**\n\nSort Types:\n* **email.id**\n* **email.email**\n* **email.confirmedAt**\n* **email.createdAt**\n* **email.updatedAt**\n* **email.deletedAt**\n\n### Request:\n`GET /v1/users/jane.doe/emails`\n\n### Response - 200 OK:\nX-Results-Total 2\n```\n[\n    {\n        \"id\": \"OesQeGyxJknB\",\n        \"email\": \"jane.doe@example.com\",\n        \"confirmedAt\": null,\n        \"createdAt\": {\n            \"date\": \"2019-05-03 10:19:13.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": {\n            \"date\": \"2019-05-03 10:30:17.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"deletedAt\": null\n    },\n    {\n        \"id\": \"lqqCYpikRQ1C\",\n        \"email\": \"jane.doe@example.org\",\n        \"confirmedAt\": null,\n        \"createdAt\": {\n            \"date\": \"2019-05-03 10:30:11.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    }\n]\n```\n\n### Error Response Codes\n\n`400 - Bad Request`\n```\n{\n    \"message\": \"value for index 0, part 2 (field) must be one of (email.id, email.email, email.confirmedAt, email.createdAt, email.updatedAt, email.deletedAt)\",\n    \"code\": 4000101\n}\n```"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "/v1/users/:user/emails",
+                  "_postman_id": "c689ad46-f283-4edf-9747-47f9d4663064",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": {
+                        "token": "{{token}}"
+                      }
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n\t\"email\": \"chrisd+8@recii.io\"\n}"
+                    },
+                    "url": "{{host}}/v1/users/{{userId}}/emails",
+                    "description": "## Create a new email in a collection\n\n`POST /v1/users/:userSpec/emails`\n\nSegment Parameters:\n* **userSpec** (string), required - User's username or Id\n\nPOST Parameters:\n* **email** (string), required - New email address\n\n### Request:\n`POST /v1/users/MgsnsKhhzVaO/emails` | `POST /v1/users/jane.doe/emails`\n\n```\n{\n\t\"email\": \"john.doe@example.com\"\n}\n```\n\n### Response - 201 Created:\n```\n{\n    \"id\": \"OesQeGyxJknB\",\n    \"email\": \"jane.doe@example.net\",\n    \"confirmedAt\": null,\n    \"createdAt\": {\n        \"date\": \"2019-05-03 10:19:13.198886\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"updatedAt\": null,\n    \"deletedAt\": null\n}\n```\n\n### Error Response Codes\n\n`400 - Bad request`\n```\n{\n    \"message\": \"Required parameter \"email\" missing\",\n    \"code\": 400180901\n}\n```\n\n`404 - Not Found`\n```\n{\n    \"message\": \"User not found\",\n    \"code\": 404180801\n}\n```\n\n`409 - Conflict`\n```\n{\n    \"message\": \"Email address jane.doe@example.net for user with username jane.doe already exists\",\n    \"code\": 409180901\n}\n```"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "/v1/users/:user/emails/:id",
+                  "_postman_id": "f6af2892-1f42-44f2-8d69-329cbdf6e4a6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": "{{host}}/v1/users/{{userId}}/emails/{{emailId}}",
+                    "description": "## Reads Email details\n\n`GET /v1/users/:userSpec/emails/:id`\n\nSegment Parameters:\n* **userSpec** (string), required - User's username or Id\n* **id** (string), required - Email Id\n\n### Request:\n`GET /v1/users/jane.doe/emails/J1N8yQRuzG7a` | `GET /v1/users/MgsnsKhhzVaO/emails/J1N8yQRuzG7a`\n\n### Response - 200 OK:\n```\n{\n    \"id\": \"J1N8yQRuzG7a\",\n    \"email\": \"john.doe@example.com\",\n    \"confirmedAt\": null,\n    \"createdAt\": {\n        \"date\": \"2019-05-03 13:27:59.000000\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"updatedAt\": null,\n    \"deletedAt\": null\n}\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"Email not found\",\n    \"code\": 404180901\n}\n```"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "/v1/users/:user/emails/:id",
+                  "_postman_id": "6c5b784a-d47f-49d9-b1bb-9a921469269a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": {
+                        "token": "{{token}}"
+                      }
+                    },
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n\t\"email\":\"jane.doe@example.org\"\n}"
+                    },
+                    "url": "{{host}}/v1/users/{{userId}}/emails/{{emailId}}",
+                    "description": "## Update Email object in a collection. Applies partial modifications to Email.\n\n`PATCH /v1/users/:userSpec/emails/:id`\n\nSegment Parameters:\n* **userSpec** (string), required - User's username or Id\n* **id** (string), required - Email Id\n\nPOST Parameters:\n* **email** (string) - New email address\n\n### Request:\n`PATCH /v1/users/jane.doe/emails/OesQeGyxJknB` | `PATCH /v1/users/MgsnsKhhzVaO/emails/OesQeGyxJknB`\n\n```\n{\n\t\"email\": \"jane.doe@example.org\"\n}\n```\n\n### Response - 200 OK:\n```\n{\n    \"id\": \"OesQeGyxJknB\",\n    \"email\": \"jane.doe@example.org\",\n    \"confirmedAt\": null,\n    \"createdAt\": {\n        \"date\": \"2019-05-03 10:19:13.000000\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"updatedAt\": {\n        \"date\": \"2019-05-03 10:29:28.202099\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"deletedAt\": null\n}\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"Email not found\",\n    \"code\": 404180901\n}\n```\n\n`409 - Conflict`\n```\n{\n    \"message\": \"Email address jane.doe@example.net for user with username jane.doe already exists\",\n    \"code\": 409180901\n}\n```"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "/v1/users/:user/emails/:id",
+                  "_postman_id": "98017b2c-cf10-4210-b9db-8d6bea754dfc",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": {
+                        "token": "{{token}}"
+                      }
+                    },
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n\t\"email\":\"jane.doe@example.org\"\n}"
+                    },
+                    "url": "{{host}}/v1/users/{{userId}}/emails/{{emailId}}",
+                    "description": "## Delete Email from Collection\n\n`DELETE /v1/users/:userSpec/emails/:id`\n\nSegment Parameters:\n* **userSpec** (string), required - User's username or Id\n* **id** (string), required - Email Id\n\n### Request:\n`DELETE /v1/users/jane.doe/emails/OesQeGyxJknB` | `DELETE /v1/users/MgsnsKhhzVaO/emails/OesQeGyxJknB`\n\n\n### Response - 200 OK:\n```\n{\n    \"resourceId\": \"OesQeGyxJknB\",\n    \"message\": \"Email has been successfully deleted\"\n}\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"Email not found\",\n    \"code\": 404180901\n}\n```"
+                  },
+                  "response": []
+                }
+              ],
+              "_postman_id": "e6c8bb87-8e29-4a70-8a26-f6490803dbc6",
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "roles",
+              "item": [
+                {
+                  "name": "/v1/users/:user/roles",
+                  "_postman_id": "3733027f-445b-40a5-8c29-517a73b5e595",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": "{{host}}/v1/users/{{userId}}/{{namespace}}/roles",
+                    "description": "## List User's Roles withing given organisation\n\n`GET /v1/users/{userSpec}/{namespace}/roles`\n\nGET Parameters:\n* **userSpec** (string), required - Username or Id\n* **namespace** (string), required - Organiation namespace\n\n### Request:\n`GET /v1/users/john.doe/acme/roles` | `GET /v1/users/0WYvTZ5V50st/acme/roles`\n\n### Response - 200 OK:\nX-Results-Total 2\n```\n[\n    {\n        \"id\": \"RHLrCNsZdCpO\",\n        \"name\": \"Candidate\",\n        \"description\": \"Grants Candidate permissions\",\n        \"createdAt\": {\n            \"date\": \"2019-05-03 13:10:49.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    },\n    {\n        \"id\": \"ZzLrCNsZdCpO\",\n        \"name\": \"Test\",\n        \"description\": \"Test\",\n        \"createdAt\": {\n            \"date\": \"2019-05-03 13:10:49.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    }\n]\n```\n\n### Error Response Codes\n\n`404 - Not found`\n```\n{\n    \"message\": \"User not found\",\n    \"code\": 404180801\n}\n```\n```\n{\n    \"message\": \"Organisation not found\",\n    \"code\": 404180101\n}\n```"
+                  },
+                  "response": []
+                }
+              ],
+              "_postman_id": "75cde5fc-34cd-463e-a079-61e06ffb4019",
+              "_postman_isSubFolder": true
+            },
+            {
+              "name": "/v1/users",
+              "_postman_id": "22d0c856-7051-4238-91d0-455a88fdae68",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "{{token}}"
+                  }
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{host}}/v1/users",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "query": [
+                    {
+                      "key": "filters[]",
+                      "value": "and-email.email-inci-value-$email",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "description": "## List User objects\n\n`GET /v1/users`\n\nGET Parameters:\n* **filters** (array), optional - One or more filters\n* **sorts** (array), optional - One or more sorting parameters\n* **limit** (integer), optional - Limit on the result set\n* **offset** (integer), optional - Offset on the result set\n* **count** (boolean), optional - If set to true Response:X-Results-Total header will show total count in result set (regardless of any limit and offset set)\n* **detailed** (boolean), optional - If set to true `Nested Entities` will be included in the response. Default: false.\n\nFilter Types:\n* **user.id**\n* **user.username**\n* **user.firstName**\n* **user.lastName**\n* **user.isActive**\n* **user.createdAt**\n* **user.updatedAt**\n* **user.deletedAt**\n\nSort Types:\n* **user.id**\n* **user.username**\n* **user.firstName**\n* **user.lastName**\n* **user.isActive**\n* **user.createdAt**\n* **user.updatedAt**\n* **user.deletedAt**\n\n### Request:\n`GET /v1/users`\n\n### Response - 200 OK:\nX-Results-Total 2\n```\n[\n    {\n        \"id\": \"FLmLQ4VLWjHG\",\n        \"username\": \"john.doe\",\n        \"firstName\": John,\n        \"lastName\": Doe,\n        \"createdAt\": {\n            \"date\": \"2019-04-18 13:05:09.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    },\n    {\n        \"id\": \"bjlIfe4sdyzL\",\n        \"username\": \"jane\",\n        \"firstName\": Jane,\n        \"lastName\": Doe,\n        \"createdAt\": {\n            \"date\": \"2019-04-18 13:05:41.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    }\n]\n```\n\n### Error Response Codes\n\n`400 - Bad Request`\n```\n{\n    \"message\": \"value for index 0, part 2 (field) must be one of (user.id, user.username, user.createdAt)\",\n    \"code\": 4000101\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/users",
+              "_postman_id": "72af31cb-9a5c-44eb-b20b-3c1b49f0608b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "{{token}}"
+                  }
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"username\": \"1598448091\",\n\t\"firstName\": \"Chris\",\n\t\"lastName\": \"Dixon\",\n\t\"password\": \"123456\",\n\t\"email\": \"chris+1598448091@recii.io\",\n\t\"organisation\": \"elective\"\n}",
+                  "options": {
+                    "raw": {}
+                  }
+                },
+                "url": "{{host}}/v1/users",
+                "description": "## Create a new user in a collection\n\n`POST /v1/users`\n\nPOST Parameters:\n* **username** (string), required - Unique user name\n* **password** (string), required - Password for this account\n* **email** (string), required - Email for user account\n* **firstName** (string), optional - First Name\n* **lastName** (string), optional - Last Name\n\n### Request:\n`POST /v1/users`\n\n```\n{\n\t\"username\": \"john.doe\",\n\t\"password\": \"123456\",\n\t\"email\": \"john.doe@example.com\"\n}\n```\n\n### Response - 201 Created:\n```\n{\n    \"id\": \"MgsnsKhhzVaO\",\n    \"username\": \"john.doe\",\n    \"firstName\": null,\n    \"lastName\": null,\n    \"createdAt\": {\n        \"date\": \"2019-04-23 13:25:43.137420\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"updatedAt\": null,\n    \"deletedAt\": null\n}\n```\n\n### Error Response Codes\n\n`400 - Bad request`\n```\n{\n    \"message\": \"Required parameter \"usename\" missing\",\n    \"code\": 0\n}\n```\n\n`409 - Conflict`\n```\n{\n    \"message\": \"User with username john.doe already exists\",\n    \"code\": 4090001\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/users/:userSpec",
+              "_postman_id": "3ae747c6-30b8-4e0a-a9ed-97032663386a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{host}}/v1/users/{{userId}}",
+                "description": "## Reads User details\n\n`GET /v1/users/:userSpec`\n\nSegment Parameters:\n* **userSpec** (string), required - Username or Id\n\n### Request:\n`GET /v1/users/john.doe` | `GET /v1/users/0WYvTZ5V50st`\n\n### Response - 200 OK:\n```\n{\n    \"id\": \"0WYvTZ5V50st\",\n    \"username\": \"john.doe\",\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"isActive\": true,\n    \"phone\": null,\n    \"primaryEmail\": {\n        \"id\": \"t8CtR58KjkTx\",\n        \"email\": \"john.doe@example.com\",\n        \"confirmedAt\": {\n            \"date\": \"2019-05-07 13:15:20.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"createdAt\": {\n            \"date\": \"2019-05-03 13:19:06.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    },\n    \"createdAt\": {\n        \"date\": \"2019-05-03 13:19:06.000000\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"updatedAt\": {\n        \"date\": \"2019-05-07 13:57:54.000000\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"deletedAt\": null\n}\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"User not found\",\n    \"code\": 404180801\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/users/:userSpec/invite",
+              "_postman_id": "d81b4cdf-e3d5-4814-acd0-3dfc20a6df77",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{host}}/v1/users/{{userId}}/invite",
+                "description": "## Reads User details\n\n`GET /v1/users/:userSpec`\n\nSegment Parameters:\n* **userSpec** (string), required - Username or Id\n\n### Request:\n`GET /v1/users/john.doe` | `GET /v1/users/0WYvTZ5V50st`\n\n### Response - 200 OK:\n```\n{\n    \"id\": \"0WYvTZ5V50st\",\n    \"username\": \"john.doe\",\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"isActive\": true,\n    \"phone\": null,\n    \"primaryEmail\": {\n        \"id\": \"t8CtR58KjkTx\",\n        \"email\": \"john.doe@example.com\",\n        \"confirmedAt\": {\n            \"date\": \"2019-05-07 13:15:20.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"createdAt\": {\n            \"date\": \"2019-05-03 13:19:06.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    },\n    \"createdAt\": {\n        \"date\": \"2019-05-03 13:19:06.000000\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"updatedAt\": {\n        \"date\": \"2019-05-07 13:57:54.000000\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"deletedAt\": null\n}\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"User not found\",\n    \"code\": 404180801\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/users/:userSpec",
+              "_postman_id": "ec449b3c-f77e-4246-8f7e-2d925979563e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"primaryEmail\": \"t8CtR58KjkTx\"\n}"
+                },
+                "url": "{{host}}/v1/users/{{username}}",
+                "description": "## Update User object in a collection. Applies partial modifications to User.\n\n`PATCH /v1/users/:userSpec`\n\nSegment Parameters:\n* **userSpec** (string), required - Username or Id\n\nPOST Parameters:\n* **username** (string) - User username\n* **firstName** (string) - First Name\n* **lastName** (string) - Last Name\n* **primaryEmail** (string) - Id of one the User's Emails\n\n### Request:\n`PATCH /v1/users/john.doe` | `PATCH /v1/users/0WYvTZ5V50st`\n\n```\n{\n\t\"username\": \"jane.doe\",\n\t\"firstName\": \"Jane\",\n\t\"lastName\": \"Doe\",\n\t\"primaryEmail\": \"t8CtR58KjkTx\"\n}\n```\n\n### Response - 200 OK:\n```\n{\n    \"id\": \"0WYvTZ5V50st\",\n    \"username\": \"jane.doe\",\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"isActive\": true,\n    \"phone\": null,\n    \"primaryEmail\": {\n        \"id\": \"t8CtR58KjkTx\",\n        \"email\": \"john.doe@example.com\",\n        \"confirmedAt\": {\n            \"date\": \"2019-05-07 13:15:20.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"createdAt\": {\n            \"date\": \"2019-05-03 13:19:06.000000\",\n            \"timezone_type\": 3,\n            \"timezone\": \"UTC\"\n        },\n        \"updatedAt\": null,\n        \"deletedAt\": null\n    },\n    \"createdAt\": {\n        \"date\": \"2019-05-03 13:19:06.000000\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"updatedAt\": {\n        \"date\": \"2019-05-07 15:36:51.846190\",\n        \"timezone_type\": 3,\n        \"timezone\": \"UTC\"\n    },\n    \"deletedAt\": null\n}\n```\n\n### Error Response Codes\n`400 - Bad Request`\n```\n{\n    \"message\": \"Field primaryEmail failed validation because value: \"t8CtR58KjkTx\" is not valid email id or email does not belong to this User\",\n    \"code\": 0\n}\n```\n\n`404 - Not Found`\n```\n{\n    \"message\": \"User not found\",\n    \"code\": 404180801\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/users/:userSpec",
+              "_postman_id": "88b7b2f4-ffa6-4e60-98af-7d66212c2f6e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": "{{host}}/v1/users/{{username}}",
+                "description": "## Delete User from Collection\n\n`DELETE /v1/users/:userSpec`\n\nSegment Parameters:\n* **userSpec** (string) - Username or Id\n\n### Request:\n`DELETE /v1/users/john.doe` | `DELETE /v1/users/0WYvTZ5V50st`\n\n### Response - 200 OK:\n```\n{\n    \"resourceId\": \"john.doe\",\n    \"message\": \"User has been successfully deleted\"\n}\n```\n\n### Error Response Codes\n\n`404 - Not Found`\n```\n{\n    \"message\": \"User not found\",\n    \"code\": 404180801\n}\n```"
+              },
+              "response": []
+            }
+          ],
+          "_postman_id": "5275ffcf-6748-412e-861a-6c8c90a97895",
+          "_postman_isSubFolder": true
+        },
+        {
+          "name": "emails",
+          "item": [
+            {
+              "name": "/v1/emails/verify/:token",
+              "_postman_id": "f9ec5cb4-6431-443f-9ca0-c5e4fd2ec1b1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": "{{host}}/v1/emails/verify/{{emailToken}}",
+                "description": "## Verifies Email address\n\n`GET /v1/emails/verify/:token`\n\nSegment Parameters:\n* **token** (string), required - Token to use for email verification\n\n### Request:\n`GET /v1/emails/verify/J1N8yQRuzG7aJ1N8yQRuzG7aJ1N8yQRuzG7a`\n\n### Response - 200 OK:\n```\n{\n    \"message\": \"Email has been successfully verified \",\n    \"code\": 200\n}\n```\n\n### Error Response Codes\n`400 - Bad Request`\n```\n{\n    \"message\": \"Email could not be verified. Token is either invalid or expired\",\n    \"code\": 400180904\n}\n```\n\n`404 - Not Found`\n```\n{\n    \"message\": \"Email not found\",\n    \"code\": 404180901\n}\n```"
+              },
+              "response": []
+            }
+          ],
+          "_postman_id": "95ccdd2a-882c-4972-973c-1d85e80b7731",
+          "_postman_isSubFolder": true
+        },
+        {
+          "name": "password",
+          "item": [
+            {
+              "name": "/password/reset",
+              "_postman_id": "323fe2b7-2e2e-41a6-957d-e99bc22b5359",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"userSpec\": \"chris\"\n}"
+                },
+                "url": "{{host}}/v1/password/reset",
+                "description": "Request a reset of the user password\n\nTakes following body arguments:\n * userSpec - either User username or Email emailAddress\n\nExample username:\nThis will request password reset for User with username admin\n```\n{\n\t\"userSpec\": \"admin\",\n}\n```\nExample email:\nThis will request password reset for User with Email emailAddress admin@electivegroup.com\n```\n{\n\t\"userSpec\": \"admin@electivegroup.com\",\n}\n```\n\nResponse Example:\nStatus 202 OK - Password reset requested\n\nStatus 404 Not Found - User not found\n```\n{\n    \"message\": \"User not found\",\n    \"code\": 4040001\n}\n```\n\nStatus 429 Forbidden - Exceeded number of requests for this call\n```\n{\n    \"message\": \"API rate limit exceeded for this call\",\n    \"code\": 4000001\n}\n```\n\nStatus 404 Bad Request - The user exists, but has no valid and confirmed primary address defined\n```\n{\n    \"message\": \"No primary email has been defined for the user\",\n    \"code\": 4040021\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/password/update",
+              "_postman_id": "fa67d921-c2ed-40b5-948c-c31fde433840",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "type": "text",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"passwordToken\": \"VeyuFHlvEI5cPdjCx9tNVg4XuMqBotLlgO4YVsPsDl9efPPwPqcSFc6IcDBggznO\",\n\t\"password\": \"123456\",\n\t\"confirm\": \"123456\"\n}"
+                },
+                "url": "{{host}}/v1/password/update",
+                "description": "Request a reset of the user password\n\nTakes following body arguments:\n * userSpec - either User username or Email emailAddress\n\nExample username:\nThis will request password reset for User with username admin\n```\n{\n\t\"userSpec\": \"admin\",\n}\n```\nExample email:\nThis will request password reset for User with Email emailAddress admin@electivegroup.com\n```\n{\n\t\"userSpec\": \"admin@electivegroup.com\",\n}\n```\n\nResponse Example:\nStatus 202 OK - Password reset requested\n\nStatus 404 Not Found - User not found\n```\n{\n    \"message\": \"User not found\",\n    \"code\": 4040001\n}\n```\n\nStatus 429 Forbidden - Exceeded number of requests for this call\n```\n{\n    \"message\": \"API rate limit exceeded for this call\",\n    \"code\": 4000001\n}\n```\n\nStatus 404 Bad Request - The user exists, but has no valid and confirmed primary address defined\n```\n{\n    \"message\": \"No primary email has been defined for the user\",\n    \"code\": 4040021\n}\n```"
+              },
+              "response": []
+            }
+          ],
+          "_postman_id": "3411ea14-4631-4900-8fb0-988f6240f45a",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "d982110f-0fb8-49ca-9e29-024dd532f871",
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "149ea952-87f0-401a-851a-aaf0d7ff2d11",
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ],
+          "_postman_isSubFolder": true
+        },
+        {
+          "name": "token",
+          "item": [
+            {
+              "name": "/token/refresh",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "4f8a9088-8bbe-41bc-aef5-a615c079a033",
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Body contains token\", function () {",
+                      "    pm.expect(pm.response.text()).to.include(\"token\");",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "_postman_id": "113c89ae-9427-4060-98ef-53ca0f8662f3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "{{token}}"
+                  }
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"organisation\": \"trumpinc\"\n}"
+                },
+                "url": "{{host}}/v1/token/refresh",
+                "description": "Refreshes existing User Token.\n\nAllows to exchange existing non-expired User Token for e new one.\n\nPOST Parameters:\n* **organisation** (string), optional - Organisation namespace to change context of the token to \n\nPossible Responses:\n200 OK - Upon valid token refresh\n```\n{\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1NDE0Mzc3NzUsImV4cCI6MTU0MTQzODY3NSwidXNlcm5hbWUiOiJqb2huLmRvZSJ9.TBq1gsLw9fkZNZX8FqdoJ19Yt_0F-h7TIPOxFT1FZ-eegX1usJ7h5L5yYIHGwjQbaQ5PL8oh9uAa6qVTwjZSURFG3o-37K3udI0vG_w1UFj1Ll9vkkx2HpXd1ZVDxzCkTZGYnWMvCriawBiW9zCasDKNfyxJDb7kORvo1URy_CyERLl3PsaxPoSVNbOr50gqG1irfmtvjxzvGoIJDbGjOJlSNLGy9yqvyvWu73zN_nGhSbh86UqiqJbp2kl-8N-oADOJriYnCl7krKLKjqYAjdWuVkzx-ynrNcOghaee6jT3KLcyywPcvez0an72lzzNj2KoRN01e4UQhCGF8OtKiUnppxyZRpMMtRv5x7eoKcUh65dvphR70m3R1jd_e3fuDWRMB78e5S5NeHLycu2bY__hfXYk-wB0I1j9XG-Kk1MM5vtAFouTDoV6pGOiVXr-GTyxWdQrZr0SlxLN8gkOlPPmxXkfmJAElF--WW4jUpnfTLC7fIbP_61hlmd95CRSKP8eKMeu8j_giL4Y4S6Zm2cgdkPY1jx7nJBaePZT6SDRoeXy-nqDZ3Lg9hUd6t39a-0lKCKAVoHU-iDAkxcz9x0JYmpgCb99n7ucE8NRToERZZ7Hn3IDEPHWldDF_h3GCX1sUxBKjKCshp3DPV0ZX6LxDWRs43apvcLvk3O0VpM\"\n}\n```\n401 Unauthorized - Missing Authentication token\n```\n{\n\t\"message\": \"Authentication Required\"\n}\n```\n403 Forbidden - Token is for user that no loneg exists\n```\n{\n\t\"message\": \"Username could not be found.\"\n}\n```\n403 Forbidden - Authentication Token send for refresh is invalid or already expired\n```\n{\n\t\"message\": \"Invalid Token.\"\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/token/exchange",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "4f8a9088-8bbe-41bc-aef5-a615c079a033",
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Body contains token\", function () {",
+                      "    pm.expect(pm.response.text()).to.include(\"token\");",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "_postman_id": "ee1066ea-e681-460a-966b-f04180a9894c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": {
+                    "token": "{{token}}"
+                  }
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"organisation\": \"TofXCsfNzQgu\"\n}"
+                },
+                "url": "{{host}}/v1/token/exchange",
+                "description": "Refreshes existing User Token.\n\nAllows to exchange existing non-expired User Token for e new one.\n\nPOST Parameters:\n* **organisation** (string), optional - Organisation namespace to change context of the token to \n\nPossible Responses:\n200 OK - Upon valid token refresh\n```\n{\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1NDE0Mzc3NzUsImV4cCI6MTU0MTQzODY3NSwidXNlcm5hbWUiOiJqb2huLmRvZSJ9.TBq1gsLw9fkZNZX8FqdoJ19Yt_0F-h7TIPOxFT1FZ-eegX1usJ7h5L5yYIHGwjQbaQ5PL8oh9uAa6qVTwjZSURFG3o-37K3udI0vG_w1UFj1Ll9vkkx2HpXd1ZVDxzCkTZGYnWMvCriawBiW9zCasDKNfyxJDb7kORvo1URy_CyERLl3PsaxPoSVNbOr50gqG1irfmtvjxzvGoIJDbGjOJlSNLGy9yqvyvWu73zN_nGhSbh86UqiqJbp2kl-8N-oADOJriYnCl7krKLKjqYAjdWuVkzx-ynrNcOghaee6jT3KLcyywPcvez0an72lzzNj2KoRN01e4UQhCGF8OtKiUnppxyZRpMMtRv5x7eoKcUh65dvphR70m3R1jd_e3fuDWRMB78e5S5NeHLycu2bY__hfXYk-wB0I1j9XG-Kk1MM5vtAFouTDoV6pGOiVXr-GTyxWdQrZr0SlxLN8gkOlPPmxXkfmJAElF--WW4jUpnfTLC7fIbP_61hlmd95CRSKP8eKMeu8j_giL4Y4S6Zm2cgdkPY1jx7nJBaePZT6SDRoeXy-nqDZ3Lg9hUd6t39a-0lKCKAVoHU-iDAkxcz9x0JYmpgCb99n7ucE8NRToERZZ7Hn3IDEPHWldDF_h3GCX1sUxBKjKCshp3DPV0ZX6LxDWRs43apvcLvk3O0VpM\"\n}\n```\n401 Unauthorized - Missing Authentication token\n```\n{\n\t\"message\": \"Authentication Required\"\n}\n```\n403 Forbidden - Token is for user that no loneg exists\n```\n{\n\t\"message\": \"Username could not be found.\"\n}\n```\n403 Forbidden - Authentication Token send for refresh is invalid or already expired\n```\n{\n\t\"message\": \"Invalid Token.\"\n}\n```"
+              },
+              "response": []
+            },
+            {
+              "name": "/v1/token/permissions",
+              "_postman_id": "f08b64ee-4624-483a-be3a-54bfffad2a80",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{host}}/v1/token/permissions"
+              },
+              "response": []
+            }
+          ],
+          "_postman_id": "e8bdfb9f-8bff-48e2-b7b2-6d1fe5ec157f",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "51fed64f-2ac8-4aa3-be7c-b341aab84b26",
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "1a66e7a1-4b98-47bb-8625-55a233848fbc",
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ],
+          "_postman_isSubFolder": true
+        },
+        {
+          "name": "/v1/authenticate",
+          "_postman_id": "35d684cb-5f6f-478f-8be7-dd9c1e28cd38",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"123456\",\n\t\"remember_me\": true,\n\t\"organisation\": \"elective\"\n}",
+              "options": {}
+            },
+            "url": "{{host}}/v1/authenticate",
+            "description": "## Authenticates user\n\n`POST /v1/authenticate`\n\nPOST Parameters:\n* **username** (string), required - Unique user name\n* **password** (string), required - Password for this account\n* **remember_me** (boolean), optional - Wheteher to extend validity of the token.\n* **organisation** (string), optional - Namespace of the Organisation to log in to\n\n### Request:\n`POST /v1/authenticate`\n\n```\n{\n\t\"username\": \"john.doe\",\n\t\"password\": \"123456\",\n\t\"remember_me\": true,\n\t\"organisation\": \"acme\"\n}\n```\n\n### Response - 200 OK:\n```\n{\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1NTY2OTg5MTAsInVzZXJuYW1lIjoiam9obi5kb2UiLCJleHAiOjE1NTY3ODUzMTB9.Qp0faG-Fu-96PCIrF7reZ-HSKiiMRq4wZDFqtVJKeYS8UZtFYjMzj2AHa1ht_Xbxz2y6jYvLp2GmIhv1uhXH7zDLT-S13-sOOHs4tCxWfkAPUtzhEF-bCv6DhfuW95Pa90cJLLy2sU7NxohCnczQ2zR_LhkeDwxz08DxRUpZ-UwC-gHzNpOFn1gvSyzlz-omL47Jig5LzLwB3kn4kO08bgJatcfgn1jnV21JoI6sqPHQshG0TwSo0Nx63nqhtb1D95Ytnwg1fxitfLkdzRq1d7Ky2qefuHjjNooUuJ9T60qB1gyi9GJqJCefh7ftJTCcoksQhjpJHLiT8ad_szegyQ\"\n}\n```\n\n### Error Response Codes\n\n`400 - Bad request`\n```\n{\n    \"message\": \"Required parameter \"usename\" missing\",\n    \"code\": 0\n}\n```\n\n`401 - Unauthorized`\n```\n{\n    \"message\": \"Invalid Credentials\",\n    \"code\": 4010001\n}\n```\n```\n{\n    \"message\": \"Invalid Credentials\",\n    \"code\": 401180002\n}\n```\n```\n{\n    \"message\": \"Invalid Credentials\",\n    \"code\": 401180003\n}\n```\n`500 - Internal Server`\n```\n{\n    \"message\": \"Could not generate token\",\n    \"code\": 500090101\n}\n```"
+          },
+          "response": []
+        },
+        {
+          "name": "/v1/authorise",
+          "_postman_id": "d99592a0-165b-447c-8c81-913861761068",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "{{token}}"
+              }
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"permission\": \"view\",\n    \"subject\": \"ASSESSMENT\",\n    \"organisation\": \"elective\",\n    \"checks\": [\n        {\n            \"name\": \"deleted\",\n            \"authorise\": {\n                \"permission\": \"delete\",\n                \"subject\": \"ASSESSMENT\",\n                \"organisation\": \"elective\"\n            }\n        }\n    ]\n}"
+            },
+            "url": "{{host}}/v1/authorise",
+            "description": "## Checks authorisation. Checks whether given *User* has *Permission* (can peroform action) on a *Subject* within given *Organisation*\n\n`POST /v1/authorise`\n\nPOST Parameters:\n* **permission** (string), required - Permission to evaluate\n* **subject** (string), required - Subject to perform action on\n* **organisation** (string), required - Namespace of the Organisation within which action will happen\n\nOptions not yet available:\n* **username** (string), optional - Username of the user system will perform check for. By default check is done on User Token used for authentication. This option requires additional privilages.\n\n### Request:\n`POST /v1/authorise`\n\n```\n{\n\t\"permission\": \"create\",\n\t\"subject\": \"USER\",\n\t\"organisation\": \"acme\"\n}\n```\n\n### Response - 200 OK:\n```\n{\n    \"message\": \"Authorised\"\n}\n```\n\n### Response - 403 Forbidden:\n```\n{\n    \"message\": \"Access denied\",\n    \"code\": 403180001\n}\n```"
+          },
+          "response": [
+            {
+              "id": "ad89756f-42f4-446d-8200-e4680c9c032c",
+              "name": "/v1/authorise Authorised",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "type": "text",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"permission\": \"create\",\n    \"subject\": \"ASSESSMENT\",\n    \"organisation\": \"acme\"\n}"
+                },
+                "url": {
+                  "raw": "{{host}}/v1/authorise?auth=pass",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "authorise"
+                  ],
+                  "query": [
+                    {
+                      "key": "auth",
+                      "value": "pass"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "nginx/1.17.2"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 05 Aug 2019 10:44:41 GMT"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "POST, GET, OPTIONS, PATCH, PUT, DELETE"
+                },
+                {
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "Content-Type, X-Auth-Token, X-App-Token, Authorization"
+                },
+                {
+                  "key": "Access-Control-Expose-Headers",
+                  "value": "X-Auth-Token-Expires-In, X-Results-Total"
+                },
+                {
+                  "key": "X-Service-Name",
+                  "value": "acl-api"
+                },
+                {
+                  "key": "Via",
+                  "value": "1.1 google"
+                },
+                {
+                  "key": "Alt-Svc",
+                  "value": "clear"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n    \"message\": \"Authorised\"\n}"
+            },
+            {
+              "id": "a2a689cc-8c39-4027-9048-de400bec3f4b",
+              "name": "/v1/authorise Access denied",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "type": "text",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"permission\": \"create\",\n    \"subject\": \"INVITATION\",\n    \"organisation\": \"acme\"\n}"
+                },
+                "url": {
+                  "raw": "{{host}}/v1/authorise?auth=fail",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "authorise"
+                  ],
+                  "query": [
+                    {
+                      "key": "auth",
+                      "value": "fail"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "nginx/1.17.2"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 05 Aug 2019 11:02:09 GMT"
+                },
+                {
+                  "key": "Via",
+                  "value": "1.1 google"
+                },
+                {
+                  "key": "Alt-Svc",
+                  "value": "clear"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n    \"message\": \"Access denied\",\n    \"code\": 403180001\n}"
+            }
+          ]
+        }
+      ],
+      "_postman_id": "a0134150-822c-4724-8af4-1d3f52d4618a",
+      "description": "## Error Codes:\nThere are two types of codes: Generic **4010001** (7 digits) and Specific **500090101** (9 digits) with following patterns: SSSEECC and SSSPPEECC respectivelly.\n**SSS** - This is HTTP equivalent, i.e. 401, 404, 500\n**PP** - Denotes project id, 18 for ACL API\n**EE** - Denotes entity id\n**CC** - Denotes unique error code for this entity\n\n### List of codes:\n**4010001** - \"Invalid Credentials\" - Unauthorized. Supplied credentials, such as username or password are invalid.\n**400180901** - \"Required parameter \"email\" missing\" - Bad Request.\n**400180902** - \"Field email failed validation because value must be a valid E-Mail address\" - Bad Request.\n**400180903** - \"Email not confirmed\" - Bad Request.\n**400180904** - \"Email could not be verified. Token is either invalid or expired \" - Bad Request.\n**400181001** - \"Required parameter \"user\" missing\" - Bad Request.\n**400181002** - \"Required parameter \"organisation\" missing\" - Bad Request.\n**400181003** - \"Required parameter \"role\" missing\" - Bad Request.\n**400181101** - \"Required parameter \"permission\" missing\" - Bad Request.\n**400181102** - \"Required parameter \"subject\" missing\" - Bad Request.\n**400181103** - \"Required parameter \"organisation\" missing\" - Bad Request.\n**401180002** - \"Invalid Credentials\" - Unauthorized. User account is inactive.\n**401180003** - \"Invalid Credentials\" - Unauthorized. User does not belong to the organisation.\n**404180101** - \"Organisation not found\" - Not Found\n**404180201** - \"Permission not found\" - Not Found\n**404180301** - \"PermissionGroup not found\" - Not Found\n**404180501** - \"Role not found\" - Not Found\n**404180601** - \"Subject not found\" - Not Found\n**404180701** - \"SubjectPermission not found\" - Not Found\n**404180801** - \"User not found\" - Not Found\n**404180901** - \"Email not foud\" - Not Found\n**409180901** - \"Email address jane.doe@example.com for user with username john.doe already exists\" - Conflict.\n**4000101** - \"value for index 0, part 2 (field) must be one of (organisation.id, organisation.name, organisation.createdAt)\n**4090001** - \"Organisation with namespace acme already exists!\n\n**400180801** - \"value is too short. Minimum length is 8 characters\n**400180802** - \"value must include at least one number\n**400180803** - \"value must include at least two letter\n**400180804** - \"value must include at least one upper case character\n**400180805** - \"value must include at least one lower case character\n**400180806** - \"value must include at least one the special characters: . , ! @ £ $ % ^ & * ( ) _ - + = ? / \\\n\n\n\n",
+      "auth": {
+        "type": "bearer",
+        "bearer": {
+          "token": "{{token}}"
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "1c65c2a7-738d-46a2-9686-77398c0d8e89",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "00502eae-0f02-441a-b3eb-361b6e624788",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "c254ef5f-ffbb-467f-b9ec-f28d00af4fc0",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "3bcad144-8222-4b16-95b2-d03b7a819f7d",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
