@@ -4,19 +4,5 @@
     "name": "messaging-api",
     "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
   },
-  "item": [
-    {
-      "name": "testing",
-      "id": "c6443fd0-39a8-4914-b73e-a2fea0999a78",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": null
-      },
-      "response": []
-    }
-  ]
+  "item": []
 }
