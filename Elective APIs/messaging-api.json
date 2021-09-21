@@ -4,5 +4,11 @@
     "name": "messaging-api",
     "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
   },
-  "item": []
+  "item": [
+    {
+      "name": "New Folder",
+      "item": [],
+      "id": "f5b31ab0-ccbb-4924-ac19-d163f62b0406"
+    }
+  ]
 }
